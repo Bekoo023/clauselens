@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+/* ---------- ClauseLens design tokens ---------- */
+@theme {
+  /* Brand */
+  --color-ink: #0b1220;
+  --color-ink-soft: #3b4356;
+  --color-paper: #f8fafc;
+  /* Card/panel surface — separate from --color-paper so it can sit one step
+     lighter (dark mode) or stay white (light mode) without touching the page bg */
+  --color-surface: #ffffff;
+  /* Fixed dark navy for decorative panels (CTA banners, auth side-panel) that
+     must stay dark regardless of color scheme — never flips like --color-ink does */
+  --color-ink-fixed: #0b1220;
+  --color-brand: #5b5bd6;
+  --color-brand-deep: #4646c6;
+  --color-brand-bright: #7c6cf0;
+
+  /* Risk semantics — the visual signature of the product */
+  --color-risk-low: #10b981;
+  --color-risk-medium: #f59e0b;
+  --color-risk-high: #ef4444;
+
+  --font-display: "Bricolage Grotesque", "Inter", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --radius-card: 1.25rem;
+
+  --shadow-card: 0 1px 2px rgb(11 18 32 / 0.04), 0 8px 24px rgb(11 18 32 / 0.06);
+  --shadow-card-hover: 0 2px 4px rgb(11 18 32 / 0.05), 0 16px 40px rgb(11 18 32 / 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------- Dark mode ---------- */
+/* Same tokens, dark values — every utility built from these (text-ink,
+   bg-paper, border-ink/*, etc.) flips automatically. Decorative panels use
+   --color-ink-fixed instead, so they stay dark in both modes. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-ink: #e7eaf3;
+    --color-ink-soft: #a2aac0;
+    --color-paper: #0b1120;
+    --color-surface: #141b2e;
+  }
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-brand) 25%, transparent);
+}
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---------- Reusable primitives ---------- */
+.container-page {
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid rgb(11 18 32 / 0.06);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.card-hover:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    border-color: rgb(231 234 243 / 0.08);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.2), 0 8px 24px rgb(0 0 0 / 0.3);
+  }
+  .card-hover:hover {
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.25), 0 16px 40px rgb(0 0 0 / 0.4);
+  }
+}
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-bright));
+  color: white;
+  box-shadow: 0 4px 14px rgb(91 91 214 / 0.35);
+}
+.btn-primary:hover {
+  box-shadow: 0 6px 20px rgb(91 91 214 / 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  @apply text-ink hover:bg-ink/5;
+}
+
+.eyebrow {
+  @apply text-xs font-semibold uppercase tracking-[0.14em] text-brand;
+}
+
+.h-display {
+  font-family: var(--font-display);
+  @apply font-bold tracking-tight text-ink;
+}
+
+/* ---------- Scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Hero contract-scan animation ---------- */
+@keyframes scanline {
+  0% { top: 8%; opacity: 0; }
+  8% { opacity: 1; }
+  92% { opacity: 1; }
+  100% { top: 92%; opacity: 0; }
+}
+@keyframes chip-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+.scanline {
+  animation: scanline 5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+.chip-in {
+  opacity: 0;
+  animation: chip-in 0.5s ease forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .scanline { animation: none; opacity: 0; }
+  .chip-in { animation: none; opacity: 1; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .card, .btn { transition: none; }
+}
+
+/* Print / "Export PDF": clean report output via the browser's print dialog */
+@media print {
+  .print-hidden, nav, aside, header { display: none !important; }
+  body { background: white; }
+  .card { box-shadow: none; border: 1px solid #e2e8f0; break-inside: avoid; }
+  main, .report-view { max-width: 100% !important; }
+}
