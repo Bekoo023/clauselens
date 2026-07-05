@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, FileWarning } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { analysisSchema } from "@/lib/analyze";
@@ -50,9 +50,12 @@ export default async function ContractDetailPage({ params }: { params: Promise<{
           <ReportView analysis={parsed.data} />
         </>
       ) : (
-        <div className="card mt-6 p-7">
+        <div className="card mt-6 flex flex-col items-center gap-3 p-12 text-center">
+          <span className="grid h-14 w-14 place-items-center rounded-2xl bg-risk-medium/10 text-risk-medium">
+            <FileWarning size={26} aria-hidden />
+          </span>
           <p className="text-sm text-ink-soft">No analysis is stored for this contract.</p>
-          <Link href="/dashboard/new" className="btn btn-primary mt-4">Run a new analysis</Link>
+          <Link href="/dashboard/new" className="btn btn-primary mt-2">Run a new analysis</Link>
         </div>
       )}
     </div>

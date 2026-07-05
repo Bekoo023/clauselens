@@ -62,7 +62,7 @@ export default async function SharedReportPage({ params }: { params: Promise<{ t
         <ReportView analysis={parsed.data} />
 
         {/* Growth CTA */}
-        <div className="card mt-12 border-brand/25 bg-gradient-to-br from-brand/5 to-brand-2/5 p-8 text-center">
+        <div className="card mt-12 border-brand/25 bg-gradient-to-br from-brand/5 to-brand-bright/10 p-8 text-center">
           <h2 className="h-display text-xl">Reviewing a contract of your own?</h2>
           <p className="mx-auto mt-2 max-w-md text-sm text-ink-soft">
             Get a risk score, flagged clauses, and negotiation tips in about a minute. Your first analysis is free — no credit card needed.

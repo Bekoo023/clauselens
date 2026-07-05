@@ -102,7 +102,9 @@ export default async function DashboardPage({
       {/* Contract list */}
       {contracts.length === 0 ? (
         <div className="card mt-4 flex flex-col items-center gap-3 p-12 text-center">
-          <FileText size={32} className="text-ink-soft" aria-hidden />
+          <span className="grid h-14 w-14 place-items-center rounded-2xl bg-brand/10 text-brand">
+            <FileText size={26} aria-hidden />
+          </span>
           <p className="font-semibold">No contracts yet</p>
           <p className="max-w-sm text-sm text-ink-soft">
             Paste your first contract and get a risk score, flagged clauses and negotiation tips in about a minute.

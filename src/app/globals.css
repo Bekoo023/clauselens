@@ -67,59 +67,96 @@ body {
   border-radius: 4px;
 }
 
-/* ---------- Reusable primitives ---------- */
-.container-page {
-  @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
-}
+/* ---------- Reusable primitives ----------
+   Wrapped in @layer components so plain utility classes (e.g. `border-risk-high/30`,
+   `text-white`, `shadow-card-hover` alongside `card`/`h-display`/`eyebrow`/`btn`) win
+   in the cascade instead of losing to these unlayered rules — Tailwind v4 puts
+   generated utilities in @layer utilities, and *unlayered* styles always beat
+   *layered* ones regardless of source order, so without this wrapper every
+   per-usage override below would be silently ignored. */
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
 
-.card {
-  background: var(--color-surface);
-  border: 1px solid rgb(11 18 32 / 0.06);
-  border-radius: var(--radius-card);
-  box-shadow: var(--shadow-card);
-  transition: box-shadow 0.25s ease, transform 0.25s ease;
-}
-
-.card-hover:hover {
-  box-shadow: var(--shadow-card-hover);
-  transform: translateY(-2px);
-}
-
-@media (prefers-color-scheme: dark) {
   .card {
-    border-color: rgb(231 234 243 / 0.08);
-    box-shadow: 0 1px 2px rgb(0 0 0 / 0.2), 0 8px 24px rgb(0 0 0 / 0.3);
+    background: var(--color-surface);
+    border: 1px solid rgb(11 18 32 / 0.06);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
   }
+
   .card-hover:hover {
-    box-shadow: 0 2px 4px rgb(0 0 0 / 0.25), 0 16px 40px rgb(0 0 0 / 0.4);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
   }
-}
 
-.btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all;
-}
+  @media (prefers-color-scheme: dark) {
+    .card {
+      border-color: rgb(231 234 243 / 0.08);
+      box-shadow: 0 1px 2px rgb(0 0 0 / 0.2), 0 8px 24px rgb(0 0 0 / 0.3);
+    }
+    .card-hover:hover {
+      box-shadow: 0 2px 4px rgb(0 0 0 / 0.25), 0 16px 40px rgb(0 0 0 / 0.4);
+    }
+  }
 
-.btn-primary {
-  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-bright));
-  color: white;
-  box-shadow: 0 4px 14px rgb(91 91 214 / 0.35);
-}
-.btn-primary:hover {
-  box-shadow: 0 6px 20px rgb(91 91 214 / 0.45);
-  transform: translateY(-1px);
-}
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-200;
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
 
-.btn-ghost {
-  @apply text-ink hover:bg-ink/5;
-}
+  .btn-primary {
+    background: linear-gradient(135deg, var(--color-brand), var(--color-brand-bright));
+    color: white;
+    box-shadow: 0 4px 14px rgb(91 91 214 / 0.35);
+  }
+  .btn-primary:hover {
+    background: linear-gradient(135deg, var(--color-brand-deep), var(--color-brand));
+    box-shadow: 0 6px 20px rgb(91 91 214 / 0.45);
+    transform: translateY(-1px);
+  }
+  .btn-primary:active {
+    transform: scale(0.97);
+  }
 
-.eyebrow {
-  @apply text-xs font-semibold uppercase tracking-[0.14em] text-brand;
-}
+  .btn-ghost {
+    @apply text-ink hover:bg-ink/5;
+  }
 
-.h-display {
-  font-family: var(--font-display);
-  @apply font-bold tracking-tight text-ink;
+  /* ---------- Form fields ---------- */
+  .input {
+    @apply w-full rounded-xl border border-ink/15 bg-surface px-4 py-2.5 text-sm text-ink transition-colors duration-150 placeholder:text-ink-soft/70;
+  }
+  .input:hover {
+    border-color: rgb(11 18 32 / 0.25);
+  }
+  .input:focus {
+    outline: none;
+    border-color: var(--color-brand);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-brand) 15%, transparent);
+  }
+  .input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  @media (prefers-color-scheme: dark) {
+    .input:hover {
+      border-color: rgb(231 234 243 / 0.22);
+    }
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.14em] text-brand;
+  }
+
+  .h-display {
+    font-family: var(--font-display);
+    @apply font-bold tracking-tight text-ink;
+  }
 }
 
 /* ---------- Scroll reveal ---------- */
@@ -152,12 +189,41 @@ body {
   animation: chip-in 0.5s ease forwards;
 }
 
+/* ---------- Dot-grid backdrop (hero / feature panels) ---------- */
+.bg-dot-grid {
+  background-image: radial-gradient(circle, rgb(11 18 32 / 0.14) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 65% 55% at 50% 0%, black 45%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 65% 55% at 50% 0%, black 45%, transparent 85%);
+}
+@media (prefers-color-scheme: dark) {
+  .bg-dot-grid {
+    background-image: radial-gradient(circle, rgb(231 234 243 / 0.14) 1px, transparent 1px);
+  }
+}
+
+/* ---------- Risk gauge draw-in ---------- */
+.risk-gauge-arc {
+  transition: stroke-dashoffset 1s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ---------- Mobile nav open transition ---------- */
+@keyframes menu-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: none; }
+}
+.menu-in {
+  animation: menu-in 0.2s ease-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .scanline { animation: none; opacity: 0; }
   .chip-in { animation: none; opacity: 1; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .card, .btn { transition: none; }
+  .risk-gauge-arc { transition: none; }
+  .menu-in { animation: none; }
 }
 
 /* Print / "Export PDF": clean report output via the browser's print dialog */

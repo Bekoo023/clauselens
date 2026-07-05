@@ -58,15 +58,15 @@ export default function RegisterPage() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="name" className="text-sm font-medium">Name</label>
-          <input id="name" name="name" autoComplete="name" required className="mt-1.5 w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm" />
+          <input id="name" name="name" autoComplete="name" required className="input mt-1.5" />
         </div>
         <div>
           <label htmlFor="email" className="text-sm font-medium">Email</label>
-          <input id="email" name="email" type="email" autoComplete="email" required className="mt-1.5 w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm" />
+          <input id="email" name="email" type="email" autoComplete="email" required className="input mt-1.5" />
         </div>
         <div>
           <label htmlFor="password" className="text-sm font-medium">Password</label>
-          <input id="password" name="password" type="password" autoComplete="new-password" minLength={8} required className="mt-1.5 w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm" />
+          <input id="password" name="password" type="password" autoComplete="new-password" minLength={8} required className="input mt-1.5" />
           <p className="mt-1 text-xs text-ink-soft">At least 8 characters.</p>
         </div>
         {error && <p role="alert" className="text-sm text-risk-high">{error}</p>}

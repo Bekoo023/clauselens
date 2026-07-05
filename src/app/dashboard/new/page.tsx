@@ -74,7 +74,7 @@ export default function NewAnalysisPage() {
             name="title"
             required
             placeholder="e.g. Acme Corp — Services Agreement"
-            className="mt-1.5 w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm"
+            className="input mt-1.5"
           />
         </div>
 
@@ -82,7 +82,7 @@ export default function NewAnalysisPage() {
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
             <label htmlFor="contractType" className="text-sm font-medium">Contract type <span className="font-normal text-ink-soft">(optional)</span></label>
-            <select id="contractType" name="contractType" className="mt-1.5 w-full rounded-xl border border-ink/15 bg-surface px-4 py-2.5 text-sm">
+            <select id="contractType" name="contractType" className="input mt-1.5">
               <option value="">Auto-detect</option>
               {CONTRACT_TYPES.map((t) => (
                 <option key={t.slug} value={t.slug}>{t.longName}</option>
@@ -91,7 +91,7 @@ export default function NewAnalysisPage() {
           </div>
           <div>
             <label htmlFor="perspective" className="text-sm font-medium">Your side <span className="font-normal text-ink-soft">(optional)</span></label>
-            <select id="perspective" name="perspective" className="mt-1.5 w-full rounded-xl border border-ink/15 bg-surface px-4 py-2.5 text-sm">
+            <select id="perspective" name="perspective" className="input mt-1.5">
               <option value="">Not specified</option>
               {PERSPECTIVES.map((p) => (
                 <option key={p.value} value={p.value}>{p.label}</option>
@@ -135,7 +135,7 @@ export default function NewAnalysisPage() {
             value={body}
             onChange={(e) => setBody(e.target.value)}
             placeholder="…or paste the full contract text here"
-            className="mt-1.5 w-full rounded-xl border border-ink/15 px-4 py-3 font-mono text-xs leading-relaxed"
+            className="input mt-1.5 py-3 font-mono text-xs leading-relaxed"
           />
           {body.length > 0 && <p className="mt-1 text-right text-xs text-ink-soft">{body.length.toLocaleString()} characters</p>}
         </div>

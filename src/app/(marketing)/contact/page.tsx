@@ -47,15 +47,15 @@ export default function ContactPage() {
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label htmlFor="name" className="text-sm font-medium">Name</label>
-              <input id="name" name="name" required className="mt-1.5 w-full rounded-xl border border-ink/15 bg-surface px-4 py-2.5 text-sm" />
+              <input id="name" name="name" required className="input mt-1.5" />
             </div>
             <div>
               <label htmlFor="email" className="text-sm font-medium">Email</label>
-              <input id="email" name="email" type="email" required className="mt-1.5 w-full rounded-xl border border-ink/15 bg-surface px-4 py-2.5 text-sm" />
+              <input id="email" name="email" type="email" required className="input mt-1.5" />
             </div>
             <div>
               <label htmlFor="message" className="text-sm font-medium">Message</label>
-              <textarea id="message" name="message" rows={5} required className="mt-1.5 w-full rounded-xl border border-ink/15 bg-surface px-4 py-2.5 text-sm" />
+              <textarea id="message" name="message" rows={5} required className="input mt-1.5" />
             </div>
             <button type="submit" disabled={status === "sending"} className="btn btn-primary w-full disabled:opacity-60">
               {status === "sending" ? "Sending…" : <>Send message <Send size={16} aria-hidden /></>}

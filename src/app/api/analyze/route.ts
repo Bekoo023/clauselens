@@ -80,7 +80,8 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ contractId: contract.id, analysis });
-  } catch {
+  } catch (err) {
+    console.error("Contract analysis failed:", err);
     return NextResponse.json(
       { error: "Analysis failed. Nothing was deducted from your quota — please try again." },
       { status: 500 }

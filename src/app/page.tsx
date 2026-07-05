@@ -86,33 +86,37 @@ export default function HomePage() {
       <Navbar />
       <main>
         {/* ---------- Hero ---------- */}
-        <section className="container-page grid items-center gap-14 py-16 sm:py-24 lg:grid-cols-2">
-          <div>
-            <p className="eyebrow">AI contract review</p>
-            <h1 className="h-display mt-4 text-4xl leading-[1.08] sm:text-5xl lg:text-6xl">
-              Know what you&apos;re signing.{" "}
-              <span className="bg-gradient-to-r from-brand to-brand-bright bg-clip-text text-transparent">
-                In 60 seconds.
-              </span>
-            </h1>
-            <p className="mt-5 max-w-lg text-lg text-ink-soft">
-              Upload any contract and get a risk score, flagged clauses and
-              concrete negotiation tips — in plain language, not legalese.
-              Built for freelancers, agencies and startups.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link href="/register" className="btn btn-primary text-base">
-                Analyze a contract free <ArrowRight size={18} aria-hidden />
-              </Link>
-              <Link href="/features" className="btn btn-ghost text-base">
-                See how it works
-              </Link>
+        <section className="relative overflow-hidden">
+          <div className="bg-dot-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-[34rem]" aria-hidden />
+          <div className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-96 w-[56rem] -translate-x-1/2 rounded-full bg-brand/15 blur-3xl" aria-hidden />
+          <div className="container-page grid items-center gap-14 py-16 sm:py-24 lg:grid-cols-2">
+            <div>
+              <p className="eyebrow">AI contract review</p>
+              <h1 className="h-display mt-4 text-4xl leading-[1.08] sm:text-5xl lg:text-6xl">
+                Know what you&apos;re signing.{" "}
+                <span className="bg-gradient-to-r from-brand to-brand-bright bg-clip-text text-transparent">
+                  In 60 seconds.
+                </span>
+              </h1>
+              <p className="mt-5 max-w-lg text-lg text-ink-soft">
+                Upload any contract and get a risk score, flagged clauses and
+                concrete negotiation tips — in plain language, not legalese.
+                Built for freelancers, agencies and startups.
+              </p>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <Link href="/register" className="btn btn-primary text-base">
+                  Analyze a contract free <ArrowRight size={18} aria-hidden />
+                </Link>
+                <Link href="/features" className="btn btn-ghost text-base">
+                  See how it works
+                </Link>
+              </div>
+              <p className="mt-4 text-sm text-ink-soft">
+                Free plan available · No credit card required
+              </p>
             </div>
-            <p className="mt-4 text-sm text-ink-soft">
-              Free plan available · No credit card required
-            </p>
+            <ContractScan />
           </div>
-          <ContractScan />
         </section>
 
         {/* ---------- How it works ---------- */}

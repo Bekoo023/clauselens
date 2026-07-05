@@ -89,16 +89,23 @@ export default function PricingPage() {
         </p>
 
         {/* Billing toggle */}
-        <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-ink/10 bg-surface p-1.5">
+        <div className="relative mt-8 inline-grid grid-cols-2 rounded-full border border-ink/10 bg-surface p-1.5">
+          <span
+            className="absolute inset-y-1.5 left-1.5 w-[calc(50%-0.375rem)] rounded-full bg-ink-fixed transition-transform duration-300 ease-out"
+            style={{ transform: yearly ? "translateX(100%)" : "translateX(0)" }}
+            aria-hidden
+          />
           <button
-            className={`rounded-full px-4 py-1.5 text-sm font-semibold transition ${!yearly ? "bg-ink-fixed text-white" : "text-ink-soft"}`}
+            type="button"
+            className={`relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${!yearly ? "text-white" : "text-ink-soft"}`}
             onClick={() => setYearly(false)}
             aria-pressed={!yearly}
           >
             Monthly
           </button>
           <button
-            className={`rounded-full px-4 py-1.5 text-sm font-semibold transition ${yearly ? "bg-ink-fixed text-white" : "text-ink-soft"}`}
+            type="button"
+            className={`relative z-10 rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${yearly ? "text-white" : "text-ink-soft"}`}
             onClick={() => setYearly(true)}
             aria-pressed={yearly}
           >

@@ -24,14 +24,14 @@ export function ContractSearch({ initialQuery, initialRisk }: { initialQuery: st
           placeholder="Search contracts…"
           defaultValue={initialQuery}
           onChange={(e) => apply(e.target.value, initialRisk)}
-          className="w-full rounded-xl border border-ink/15 bg-surface py-2.5 pl-10 pr-4 text-sm"
+          className="input pl-10"
         />
       </div>
       <select
         aria-label="Filter by risk"
         defaultValue={initialRisk}
         onChange={(e) => apply(initialQuery, e.target.value)}
-        className="rounded-xl border border-ink/15 bg-surface px-4 py-2.5 text-sm"
+        className="input w-auto"
       >
         <option value="">All risk levels</option>
         <option value="LOW">Low risk</option>

@@ -58,7 +58,7 @@ export function PlaybookRules({ initialRules }: { initialRules: Rule[] }) {
           onChange={(e) => setInput(e.target.value)}
           maxLength={300}
           placeholder="e.g. Never accept net-90 payment terms"
-          className="min-w-0 flex-1 rounded-xl border border-ink/15 bg-surface px-4 py-2.5 text-sm"
+          className="input min-w-0 flex-1"
           disabled={rules.length >= 20}
         />
         <button

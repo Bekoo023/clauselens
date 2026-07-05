@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X, ScanSearch } from "lucide-react";
 
 const links = [
@@ -14,9 +14,21 @@ const links = [
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-ink/5 bg-paper/80 backdrop-blur-lg">
+    <header
+      className={`sticky top-0 z-50 border-b bg-paper/80 backdrop-blur-lg transition-shadow duration-300 ${
+        scrolled ? "border-ink/10 shadow-[0_1px_16px_rgb(11_18_32/0.06)]" : "border-ink/5"
+      }`}
+    >
       <nav className="container-page flex h-16 items-center justify-between" aria-label="Main">
         <Link href="/" className="flex items-center gap-2 font-bold text-ink">
           <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-brand to-brand-bright text-white">
@@ -49,7 +61,7 @@ export function Navbar() {
       </nav>
 
       {open && (
-        <div className="border-t border-ink/5 bg-paper px-5 py-4 md:hidden">
+        <div className="menu-in border-t border-ink/5 bg-paper px-5 py-4 md:hidden">
           <div className="flex flex-col gap-1">
             {links.map((l) => (
               <Link key={l.href} href={l.href} className="rounded-lg px-3 py-2 font-medium hover:bg-ink/5" onClick={() => setOpen(false)}>

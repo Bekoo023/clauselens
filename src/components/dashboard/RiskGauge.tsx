@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { AlertTriangle, CheckCircle2, OctagonAlert } from "lucide-react";
 import { riskLevelFromScore } from "@/lib/analyze";
 
@@ -14,6 +17,12 @@ const STATUS = {
 export function RiskGauge({ score, size = 176 }: { score: number; size?: number }) {
   const level = riskLevelFromScore(score);
   const { color, icon: Icon, label } = STATUS[level];
+  const [drawn, setDrawn] = useState(false);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setDrawn(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   const stroke = Math.round(size * 0.08);
   const radius = size / 2 - stroke;
@@ -34,7 +43,9 @@ export function RiskGauge({ score, size = 176 }: { score: number; size?: number 
           stroke={color}
           strokeWidth={stroke}
           strokeLinecap="round"
-          strokeDasharray={`${dash} ${circumference}`}
+          strokeDasharray={circumference}
+          strokeDashoffset={drawn ? circumference - dash : circumference}
+          className="risk-gauge-arc"
         />
       </svg>
       <div className="-mt-9 flex flex-col items-center">

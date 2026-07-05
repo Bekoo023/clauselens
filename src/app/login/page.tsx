@@ -40,11 +40,11 @@ export default function LoginPage() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="email" className="text-sm font-medium">Email</label>
-          <input id="email" name="email" type="email" autoComplete="email" required className="mt-1.5 w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm" />
+          <input id="email" name="email" type="email" autoComplete="email" required className="input mt-1.5" />
         </div>
         <div>
           <label htmlFor="password" className="text-sm font-medium">Password</label>
-          <input id="password" name="password" type="password" autoComplete="current-password" required className="mt-1.5 w-full rounded-xl border border-ink/15 px-4 py-2.5 text-sm" />
+          <input id="password" name="password" type="password" autoComplete="current-password" required className="input mt-1.5" />
         </div>
         {error && <p role="alert" className="text-sm text-risk-high">{error}</p>}
         <button type="submit" disabled={loading} className="btn btn-primary w-full disabled:opacity-60">
