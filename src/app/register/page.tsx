@@ -41,6 +41,24 @@ export default function RegisterPage() {
       password: body.password,
       redirect: false,
     });
+
+    // If the user arrived from a pricing CTA, send them straight into checkout
+    const params = new URLSearchParams(window.location.search);
+    const plan = params.get("plan");
+    if (plan === "pro" || plan === "business") {
+      const interval = params.get("interval") === "yearly" ? "yearly" : "monthly";
+      const checkoutRes = await fetch("/api/stripe/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan, interval }),
+      });
+      const checkoutData = await checkoutRes.json().catch(() => ({}));
+      if (checkoutData.url) {
+        window.location.href = checkoutData.url;
+        return;
+      }
+    }
+
     router.push("/dashboard");
   }
 

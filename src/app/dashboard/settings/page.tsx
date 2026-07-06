@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { PLAN_LIMITS } from "@/lib/plans";
 import type { Plan } from "@prisma/client";
 import { UpgradeButtons } from "@/components/dashboard/UpgradeButtons";
+import { ManageBillingButton } from "@/components/dashboard/ManageBillingButton";
 import { PlaybookRules } from "@/components/dashboard/PlaybookRules";
 
 export default async function SettingsPage() {
@@ -43,14 +44,7 @@ export default async function SettingsPage() {
             <> · renews {user.planRenewsAt.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</>
           )}
         </p>
-        {user.plan === "FREE" ? (
-          <UpgradeButtons />
-        ) : (
-          <p className="mt-4 text-sm text-ink-soft">
-            Manage or cancel your subscription via the Stripe billing portal (link this to
-            <code className="mx-1 rounded bg-ink/5 px-1">stripe.billingPortal.sessions.create</code>).
-          </p>
-        )}
+        {user.plan === "FREE" ? <UpgradeButtons /> : <ManageBillingButton />}
       </section>
 
       <section className="card mt-4 p-7">

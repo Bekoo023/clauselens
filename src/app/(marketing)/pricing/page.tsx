@@ -146,7 +146,7 @@ export default function PricingPage() {
               ))}
             </ul>
             <Link
-              href={t.cta.href}
+              href={t.cta.href.includes("plan=") ? `${t.cta.href}&interval=${yearly ? "yearly" : "monthly"}` : t.cta.href}
               className={`btn mt-8 w-full ${t.highlight ? "btn-primary" : "border border-ink/15 hover:bg-ink/5"}`}
             >
               {t.cta.label}
