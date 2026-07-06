@@ -67,6 +67,13 @@ export default function RegisterPage() {
         window.location.href = checkoutData.url;
         return;
       }
+      // Account was created and signed in; only checkout failed. Let them
+      // continue to the dashboard and retry the upgrade from Settings.
+      setLoading(false);
+      setError(
+        (checkoutData.error ?? "Could not start checkout.") + " Your account was created — you can upgrade from Settings."
+      );
+      return;
     }
 
     router.push("/dashboard");

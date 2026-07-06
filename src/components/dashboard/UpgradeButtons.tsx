@@ -5,18 +5,25 @@ import { PRICING } from "@/lib/plans";
 
 export function UpgradeButtons() {
   const [loading, setLoading] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [yearly, setYearly] = useState(true);
 
   async function upgrade(plan: "pro" | "business") {
     setLoading(plan);
-    const res = await fetch("/api/stripe/checkout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ plan, interval: yearly ? "yearly" : "monthly" }),
-    });
-    const data = await res.json().catch(() => ({}));
-    if (data.url) window.location.href = data.url;
-    else setLoading(null);
+    setError(null);
+    try {
+      const res = await fetch("/api/stripe/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan, interval: yearly ? "yearly" : "monthly" }),
+      });
+      const data = await res.json();
+      if (!res.ok || !data.url) throw new Error(data.error);
+      window.location.href = data.url;
+    } catch (err) {
+      setError(err instanceof Error && err.message ? err.message : "Could not start checkout. Please try again.");
+      setLoading(null);
+    }
   }
 
   return (
@@ -47,6 +54,7 @@ export function UpgradeButtons() {
           {loading === "business" ? "Redirecting…" : `Upgrade to Business — €${yearly ? PRICING.business.yearly : PRICING.business.monthly}/mo`}
         </button>
       </div>
+      {error && <p role="alert" className="mt-2 text-sm text-risk-high">{error}</p>}
     </div>
   );
 }
