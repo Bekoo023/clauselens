@@ -9,11 +9,15 @@ export default function TermsPage() {
   return (
     <section className="container-page max-w-3xl py-16 sm:py-20">
       <h1 className="h-display text-4xl">Terms of service</h1>
-      <p className="mt-2 text-sm text-ink-soft">Last updated: July 2026 · Template — review with a lawyer before launch.</p>
+      <p className="mt-2 text-sm text-ink-soft">Last updated: July 2026.</p>
       <div className="mt-8 space-y-6 text-[15px] leading-relaxed text-ink">
         <div>
           <h2 className="text-lg font-semibold">1. The service</h2>
-          <p className="mt-2 text-ink-soft">ClauseLens provides AI-powered contract analysis: risk scores, flagged clauses and negotiation suggestions, for informational purposes.</p>
+          <p className="mt-2 text-ink-soft">
+            {/* TODO: replace with the registered legal entity name, address and (if applicable) KvK/VAT number */}
+            ClauseLens provides AI-powered contract analysis: risk scores, flagged clauses and negotiation
+            suggestions, for informational purposes.
+          </p>
         </div>
         <div>
           <h2 className="text-lg font-semibold">2. Not legal advice</h2>
@@ -33,11 +37,24 @@ export default function TermsPage() {
         </div>
         <div>
           <h2 className="text-lg font-semibold">6. Liability</h2>
-          <p className="mt-2 text-ink-soft">To the maximum extent permitted by law, ClauseLens's total liability is limited to the fees you paid in the 12 months preceding the claim. We are not liable for decisions made based on analyses.</p>
+          <p className="mt-2 text-ink-soft">To the maximum extent permitted by law, ClauseLens&apos;s total liability is limited to the fees you paid in the 12 months preceding the claim. We are not liable for decisions made based on analyses.</p>
         </div>
         <div>
-          <h2 className="text-lg font-semibold">7. Changes & contact</h2>
-          <p className="mt-2 text-ink-soft">We may update these terms; material changes will be announced by email. Questions: legal@clauselens.com.</p>
+          <h2 className="text-lg font-semibold">7. Termination</h2>
+          <p className="mt-2 text-ink-soft">You may stop using the service and delete your account at any time from your dashboard. We may suspend or terminate accounts that violate these terms, with notice where reasonably possible.</p>
+        </div>
+        <div>
+          <h2 className="text-lg font-semibold">8. Governing law</h2>
+          <p className="mt-2 text-ink-soft">
+            {/* TODO: confirm with a lawyer once the legal entity and its country of registration are set */}
+            These terms are governed by the laws of the Netherlands, without regard to conflict-of-law rules.
+            Disputes will be submitted to the competent court in the Netherlands, unless mandatory consumer
+            protection law provides otherwise.
+          </p>
+        </div>
+        <div>
+          <h2 className="text-lg font-semibold">9. Changes & contact</h2>
+          <p className="mt-2 text-ink-soft">We may update these terms; material changes will be announced by email. Questions: legal@clauselens.org.</p>
         </div>
       </div>
     </section>

@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ type: str
   const t = getContractType(type);
   if (!t) return { title: "Not found" };
   return {
-    title: `${t.name} review: red flags, checklist & AI analysis — ClauseLens`,
+    title: `${t.name} review: red flags, checklist & AI analysis`,
     description: `What to check before signing a ${t.longName.toLowerCase()}: ${t.redFlags.length} common red flags, a pre-signing checklist, and instant AI review.`,
     alternates: { canonical: `${site.url}/review/${t.slug}` },
   };

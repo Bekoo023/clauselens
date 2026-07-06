@@ -62,24 +62,6 @@ const features = [
   },
 ];
 
-const testimonials = [
-  {
-    quote:
-      "Caught an unlimited liability clause in a €40k project contract. The negotiation tip alone paid for years of the subscription.",
-    name: "Freelance product designer",
-  },
-  {
-    quote:
-      "We review every client SOW with it before signing. It's become part of our agency's standard process.",
-    name: "Agency co-founder",
-  },
-  {
-    quote:
-      "I finally understand what I'm signing. The plain-language explanations are what make it click.",
-    name: "Startup founder",
-  },
-];
-
 export default function HomePage() {
   return (
     <>
@@ -164,31 +146,6 @@ export default function HomePage() {
                 </div>
               </Reveal>
             ))}
-          </div>
-        </section>
-
-        {/* ---------- Social proof ---------- */}
-        <section className="border-y border-ink/5 bg-surface py-20">
-          <div className="container-page">
-            <Reveal>
-              <h2 className="h-display text-center text-3xl sm:text-4xl">
-                Trusted before every signature
-              </h2>
-            </Reveal>
-            <div className="mt-12 grid gap-6 md:grid-cols-3">
-              {testimonials.map((t) => (
-                <Reveal key={t.name}>
-                  <figure className="card h-full p-7">
-                    <blockquote className="text-sm leading-relaxed text-ink">
-                      “{t.quote}”
-                    </blockquote>
-                    <figcaption className="mt-4 text-sm font-medium text-ink-soft">
-                      — {t.name}
-                    </figcaption>
-                  </figure>
-                </Reveal>
-              ))}
-            </div>
           </div>
         </section>
 

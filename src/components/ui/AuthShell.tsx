@@ -17,12 +17,11 @@ export function AuthShell({ title, subtitle, children }: {
           </span>
           <span className="h-display text-lg text-white">ClauseLens</span>
         </Link>
-        <blockquote className="max-w-md">
+        <div className="max-w-md">
           <p className="text-2xl font-semibold leading-snug">
-            “Caught an unlimited liability clause in a €40k contract. Paid for itself a hundred times over.”
+            Upload any contract and get a risk score, flagged clauses and negotiation tips in about a minute.
           </p>
-          <footer className="mt-4 text-sm text-white/60">— Freelance product designer</footer>
-        </blockquote>
+        </div>
         <p className="text-xs text-white/40">Information, not legal advice.</p>
       </div>
 

@@ -6,7 +6,7 @@ import { CTA } from "@/components/marketing/CTA";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contract review guides: red flags & checklists per contract type — ClauseLens",
+  title: "Contract review guides: red flags & checklists per contract type",
   description:
     "Free review guides for NDAs, freelance contracts, SaaS agreements, leases, and more. Common red flags, pre-signing checklists, and instant AI analysis.",
   alternates: { canonical: `${site.url}/review` },

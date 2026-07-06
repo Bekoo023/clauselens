@@ -29,7 +29,7 @@ export default function ContactPage() {
         </p>
         <div className="mt-8 space-y-4 text-sm">
           <p className="flex items-center gap-3">
-            <Mail size={18} className="text-brand" aria-hidden /> support@clauselens.com
+            <Mail size={18} className="text-brand" aria-hidden /> support@clauselens.org
           </p>
           <p className="flex items-center gap-3">
             <MessageSquare size={18} className="text-brand" aria-hidden /> Pro & Business: priority support from your dashboard
@@ -61,7 +61,7 @@ export default function ContactPage() {
               {status === "sending" ? "Sending…" : <>Send message <Send size={16} aria-hidden /></>}
             </button>
             {status === "error" && (
-              <p className="text-sm text-risk-high">Something went wrong. Email us at support@clauselens.com instead.</p>
+              <p className="text-sm text-risk-high">Something went wrong. Email us at support@clauselens.org instead.</p>
             )}
           </form>
         )}

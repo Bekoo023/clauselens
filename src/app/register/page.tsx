@@ -1,15 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { AuthShell } from "@/components/ui/AuthShell";
+import { PRICING } from "@/lib/plans";
+
+const PLAN_LABELS = { pro: "Pro", business: "Business" } as const;
 
 export default function RegisterPage() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<{ plan: "pro" | "business"; interval: "monthly" | "yearly" } | null>(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const plan = params.get("plan");
+    if (plan === "pro" || plan === "business") {
+      const interval = params.get("interval") === "yearly" ? "yearly" : "monthly";
+      setSelectedPlan({ plan, interval });
+    }
+  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -43,14 +56,11 @@ export default function RegisterPage() {
     });
 
     // If the user arrived from a pricing CTA, send them straight into checkout
-    const params = new URLSearchParams(window.location.search);
-    const plan = params.get("plan");
-    if (plan === "pro" || plan === "business") {
-      const interval = params.get("interval") === "yearly" ? "yearly" : "monthly";
+    if (selectedPlan) {
       const checkoutRes = await fetch("/api/stripe/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plan, interval }),
+        body: JSON.stringify(selectedPlan),
       });
       const checkoutData = await checkoutRes.json().catch(() => ({}));
       if (checkoutData.url) {
@@ -67,6 +77,12 @@ export default function RegisterPage() {
       title="Create your account"
       subtitle={<>Already have one? <Link href="/login" className="font-semibold text-brand hover:underline">Log in</Link></>}
     >
+      {selectedPlan && (
+        <p className="mb-6 rounded-lg border border-brand/25 bg-brand/5 px-4 py-3 text-sm">
+          You selected <strong>{PLAN_LABELS[selectedPlan.plan]}</strong> — €{PRICING[selectedPlan.plan][selectedPlan.interval === "yearly" ? "yearly" : "monthly"]}/month
+          {selectedPlan.interval === "yearly" ? ", billed yearly" : ""}. Create your account to continue to checkout.
+        </p>
+      )}
       <button onClick={() => signIn("google", { callbackUrl: "/dashboard" })} className="btn w-full border border-ink/15 hover:bg-ink/5">
         Continue with Google
       </button>
@@ -89,7 +105,7 @@ export default function RegisterPage() {
         </div>
         {error && <p role="alert" className="text-sm text-risk-high">{error}</p>}
         <button type="submit" disabled={loading} className="btn btn-primary w-full disabled:opacity-60">
-          {loading ? "Creating account…" : "Start analyzing free"}
+          {loading ? "Creating account…" : selectedPlan ? "Create account and continue to checkout" : "Start analyzing free"}
         </button>
         <p className="text-xs text-ink-soft">
           By signing up you agree to our <Link href="/terms" className="underline">terms</Link> and <Link href="/privacy" className="underline">privacy policy</Link>.

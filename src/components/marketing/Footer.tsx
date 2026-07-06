@@ -62,9 +62,13 @@ export function Footer() {
         ))}
       </div>
       <div className="border-t border-ink/5">
-        <div className="container-page flex flex-col gap-2 py-5 text-xs text-ink-soft sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} ClauseLens. All rights reserved.</p>
-          <p>ClauseLens provides information, not legal advice.</p>
+        <div className="container-page flex flex-col gap-1.5 py-5 text-xs text-ink-soft">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <p>© {new Date().getFullYear()} ClauseLens. All rights reserved.</p>
+            <p>ClauseLens provides information, not legal advice.</p>
+          </div>
+          {/* TODO: replace with the registered legal entity name, address and (if applicable) KvK/VAT number */}
+          <p>ClauseLens</p>
         </div>
       </div>
     </footer>
