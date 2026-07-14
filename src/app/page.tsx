@@ -39,7 +39,7 @@ const features = [
   {
     icon: Gauge,
     title: "Risk score 0–100",
-    text: "One number that tells you instantly whether to sign, negotiate or walk away.",
+    text: "One number that tells you instantly how much attention a contract needs before you sign it.",
   },
   {
     icon: FileSearch,
@@ -137,7 +137,7 @@ export default function HomePage() {
           <Reveal>
             <p className="eyebrow">What you get</p>
             <h2 className="h-display mt-3 max-w-2xl text-3xl sm:text-4xl">
-              A contract lawyer&apos;s eye, without the hourly rate
+              A structured second read, without the hourly rate
             </h2>
           </Reveal>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -161,7 +161,7 @@ export default function HomePage() {
             <div className="card flex flex-col items-center gap-6 p-10 text-center sm:p-14">
               <p className="eyebrow">Pricing</p>
               <h2 className="h-display max-w-xl text-3xl sm:text-4xl">
-                Less than 10 minutes of a lawyer&apos;s time. Every month.
+                Less than the price of 10 minutes with a lawyer. Every month.
               </h2>
               <p className="max-w-lg text-ink-soft">
                 Start free with one analysis per month. Upgrade to Pro from

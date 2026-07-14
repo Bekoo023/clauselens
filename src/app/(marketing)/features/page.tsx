@@ -14,8 +14,8 @@ const sections = [
   {
     icon: Gauge,
     title: "A risk score you can act on",
-    text: "Every analysis starts with a single 0–100 score, built from the severity and number of flagged clauses. Green means sign, amber means negotiate, red means stop. You always know the next step before you read a single clause.",
-    detail: "Scores are calibrated per contract type an NDA and a services agreement are judged by different standards.",
+    text: "Every analysis starts with a single 0–100 score, built from the severity and number of flagged clauses. Green means lower detected risk, amber means review recommended, red means high-priority issues to address. You always know where to focus before you read a single clause.",
+    detail: "Scores are calibrated per contract type: an NDA and a services agreement are judged by different standards.",
   },
   {
     icon: FileSearch,
