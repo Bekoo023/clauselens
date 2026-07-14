@@ -3,8 +3,13 @@
 
 export type ContractType = {
   slug: string;
-  name: string; // "NDA"
+  name: string; // "NDA" — always correctly cased, use as-is (never .toLowerCase())
   longName: string; // "Non-Disclosure Agreement"
+  // Grammar metadata, set explicitly per type rather than inferred from the
+  // first letter (a "starts with a vowel" check gets abbreviations like NDA
+  // and MSA wrong, since they're pronounced letter-by-letter).
+  article: "a" | "an"; // the article that precedes `name`, e.g. "an NDA"
+  midSentenceName: string; // lowercase-safe form for mid-sentence use, preserving abbreviation casing (e.g. "NDA", "SaaS agreement", "freelance contract")
   intro: string; // 2-3 sentences for the SEO page
   audience: string; // who typically signs this
   redFlags: { title: string; detail: string }[];
@@ -17,6 +22,8 @@ export const CONTRACT_TYPES: ContractType[] = [
     slug: "nda",
     name: "NDA",
     longName: "Non-Disclosure Agreement",
+    article: "an",
+    midSentenceName: "NDA",
     intro:
       "NDAs look harmless because they are short — but a bad one can silence you for years or claim ownership of ideas you brought to the table. Most NDA risk hides in the definition of confidential information and the survival period.",
     audience: "Freelancers, consultants, and founders in early partnership or investor talks",
@@ -44,6 +51,8 @@ export const CONTRACT_TYPES: ContractType[] = [
     slug: "freelance",
     name: "Freelance contract",
     longName: "Freelance / Independent Contractor Agreement",
+    article: "a",
+    midSentenceName: "freelance contract",
     intro:
       "Freelance agreements decide when you get paid, who owns your work, and how easily a client can walk away. The most expensive clauses are usually the quiet ones: unlimited revisions, IP transfer before payment, and 60-day payment terms.",
     audience: "Freelancers, independent contractors, and solo consultants",
@@ -72,6 +81,8 @@ export const CONTRACT_TYPES: ContractType[] = [
     slug: "saas-agreement",
     name: "SaaS agreement",
     longName: "SaaS Subscription / Services Agreement",
+    article: "a",
+    midSentenceName: "SaaS agreement",
     intro:
       "SaaS contracts govern uptime, data, and what happens when things break. Buyers should scrutinize auto-renewal and data export; vendors should watch liability and indemnity creep from enterprise templates.",
     audience: "Startups buying or selling software subscriptions",
@@ -100,6 +111,8 @@ export const CONTRACT_TYPES: ContractType[] = [
     slug: "employment",
     name: "Employment contract",
     longName: "Employment Agreement",
+    article: "an",
+    midSentenceName: "employment contract",
     intro:
       "Employment contracts front-load excitement (title, salary) and back-load risk (non-competes, IP assignment, termination terms). The clauses that matter most are the ones that apply after you leave.",
     audience: "Employees and startup hires reviewing an offer",
@@ -127,6 +140,8 @@ export const CONTRACT_TYPES: ContractType[] = [
     slug: "consulting",
     name: "Consulting agreement",
     longName: "Consulting / Professional Services Agreement",
+    article: "a",
+    midSentenceName: "consulting agreement",
     intro:
       "Consulting agreements blur the line between advice and outcomes. The riskiest clauses make you responsible for results you cannot control, or quietly expand the scope you priced.",
     audience: "Consultants, advisors, and boutique agencies",
@@ -154,6 +169,8 @@ export const CONTRACT_TYPES: ContractType[] = [
     slug: "lease",
     name: "Commercial lease",
     longName: "Commercial Lease Agreement",
+    article: "a",
+    midSentenceName: "commercial lease",
     intro:
       "Commercial leases are long, one-sided, and written by the landlord's lawyers. Unlike residential leases, there is little consumer protection — what you sign is what you get.",
     audience: "Small businesses, agencies, and startups renting office or retail space",
@@ -181,6 +198,8 @@ export const CONTRACT_TYPES: ContractType[] = [
     slug: "partnership",
     name: "Partnership agreement",
     longName: "Partnership / Founders Agreement",
+    article: "a",
+    midSentenceName: "partnership agreement",
     intro:
       "Partnership agreements are cheap to write and brutally expensive to skip. The clauses that matter are the ones for the bad days: deadlock, departure, and death.",
     audience: "Co-founders and business partners formalizing a venture",
@@ -208,6 +227,8 @@ export const CONTRACT_TYPES: ContractType[] = [
     slug: "loan",
     name: "Loan agreement",
     longName: "Business Loan Agreement",
+    article: "a",
+    midSentenceName: "loan agreement",
     intro:
       "Loan agreements are asymmetric by nature — the lender writes them. Your job is to understand exactly what triggers default, what you have pledged, and what the loan truly costs.",
     audience: "Founders and small-business owners taking on debt",
@@ -235,6 +256,8 @@ export const CONTRACT_TYPES: ContractType[] = [
     slug: "msa",
     name: "Master services agreement",
     longName: "Master Services Agreement (MSA)",
+    article: "a",
+    midSentenceName: "master services agreement",
     intro:
       "An MSA sets the legal rules once so each new project only needs a short statement of work. Powerful — but it also means one bad clause infects every future project automatically.",
     audience: "Agencies and B2B service providers with repeat clients",
@@ -262,6 +285,8 @@ export const CONTRACT_TYPES: ContractType[] = [
     slug: "influencer",
     name: "Influencer agreement",
     longName: "Influencer / Brand Partnership Agreement",
+    article: "an",
+    midSentenceName: "influencer agreement",
     intro:
       "Influencer contracts decide who owns your content, how long a brand can use your face, and what you are allowed to say afterwards. Usage rights and exclusivity are where creators lose the most money.",
     audience: "Content creators, influencers, and the brands that hire them",

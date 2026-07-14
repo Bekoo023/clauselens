@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { posts } from "@/lib/blog";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Blog — contract clauses explained in plain language",
   description:
     "Guides, checklists and clause explainers for freelancers, agencies and startups. Understand every contract before you sign.",
+  alternates: { canonical: `${site.url}/blog` },
+  openGraph: {
+    title: `Blog · ${site.name}`,
+    description: "Guides, checklists and clause explainers for freelancers, agencies and startups.",
+  },
 };
 
 export default function BlogPage() {

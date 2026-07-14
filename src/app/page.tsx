@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import {
   ArrowRight,
   FileSearch,
@@ -13,6 +14,11 @@ import { Footer } from "@/components/marketing/Footer";
 import { ContractScan } from "@/components/marketing/ContractScan";
 import { Reveal } from "@/components/marketing/Reveal";
 import { CTA } from "@/components/marketing/CTA";
+import { site } from "@/lib/site";
+
+export const metadata: Metadata = {
+  alternates: { canonical: site.url },
+};
 
 const steps = [
   {

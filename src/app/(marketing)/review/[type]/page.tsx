@@ -17,10 +17,13 @@ export async function generateMetadata({ params }: { params: Promise<{ type: str
   const { type } = await params;
   const t = getContractType(type);
   if (!t) return { title: "Not found" };
+  const title = `${t.name} review: red flags, checklist & AI analysis`;
+  const description = `What to check before signing ${t.article} ${t.midSentenceName}: ${t.redFlags.length} common red flags, a pre-signing checklist, and instant AI review.`;
   return {
-    title: `${t.name} review: red flags, checklist & AI analysis`,
-    description: `What to check before signing a ${t.longName.toLowerCase()}: ${t.redFlags.length} common red flags, a pre-signing checklist, and instant AI review.`,
+    title,
+    description,
     alternates: { canonical: `${site.url}/review/${t.slug}` },
+    openGraph: { title, description },
   };
 }
 
@@ -52,11 +55,11 @@ export default async function ContractTypeReviewPage({ params }: { params: Promi
         <p className="mt-2 text-sm text-ink-soft">Typical signers: {t.audience.toLowerCase()}.</p>
 
         <div className="card mt-8 border-brand/25 bg-brand/5 p-6">
-          <p className="font-semibold">Reviewing a {t.name.toLowerCase()} right now?</p>
+          <p className="font-semibold">Reviewing {t.article} {t.midSentenceName} right now?</p>
           <p className="mt-1 text-sm text-ink-soft">
             Upload it and get a risk score, flagged clauses, and negotiation tips in about a minute. First analysis free.
           </p>
-          <Link href="/register" className="btn btn-primary mt-4">Analyze my {t.name.toLowerCase()} →</Link>
+          <Link href="/register" className="btn btn-primary mt-4">Analyze my {t.midSentenceName} →</Link>
         </div>
 
         {/* Red flags */}

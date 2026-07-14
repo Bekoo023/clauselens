@@ -30,9 +30,13 @@ model User {
   stripeCustomerId     String?   @unique
   stripeSubscriptionId String?   @unique
   planRenewsAt         DateTime?
+  // Real Stripe subscription status (active, past_due, canceled, ...) — see src/lib/subscription.ts
+  subscriptionStatus   String?
   // Usage metering: analyses used in the current calendar month
   analysesThisMonth    Int       @default(0)
   usageResetAt         DateTime  @default(now())
+  // Bumped on password change/reset to invalidate every previously-issued JWT session.
+  sessionVersion       Int       @default(0)
   isAdmin              Boolean   @default(false)
   createdAt            DateTime  @default(now())
   accounts             Account[]
@@ -106,4 +110,12 @@ model VerificationToken {
   expires    DateTime
 
   @@id([identifier, token])
+}
+
+// Records every processed Stripe webhook event id so retried/duplicate
+// deliveries (Stripe resends on timeout, manual replays) are no-ops.
+model ProcessedWebhookEvent {
+  id          String   @id // Stripe event id, e.g. "evt_..."
+  type        String
+  processedAt DateTime @default(now())
 }

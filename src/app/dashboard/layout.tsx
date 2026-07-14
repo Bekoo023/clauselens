@@ -6,12 +6,20 @@ import { prisma } from "@/lib/prisma";
 import { PLAN_LIMITS } from "@/lib/plans";
 import type { Plan } from "@prisma/client";
 import { SidebarNav, MobileNav } from "@/components/dashboard/DashboardNav";
+import { EmailVerificationBanner } from "@/components/dashboard/EmailVerificationBanner";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
-  if (!session?.user) redirect("/login");
+  // Checking `.id` (not just `.user`) matters: an invalidated JWT (e.g. the
+  // account was just deleted, or the session predates a password reset)
+  // still has a `session.user` object — id is what's intentionally left
+  // unset in that case (see lib/auth.ts session callback).
+  if (!session?.user?.id) redirect("/login");
 
-  const user = await prisma.user.findUnique({ where: { id: session.user.id }, select: { plan: true } });
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: { plan: true, email: true, emailVerified: true, passwordHash: true },
+  });
 
   return (
     <div className="flex min-h-screen">
@@ -55,7 +63,12 @@ export default async function DashboardLayout({ children }: { children: React.Re
       <div className="flex-1">
         {/* Mobile top bar */}
         <MobileNav />
-        <main className="p-5 sm:p-8">{children}</main>
+        <main className="p-5 sm:p-8">
+          {user && user.passwordHash && !user.emailVerified && (
+            <EmailVerificationBanner email={user.email} />
+          )}
+          {children}
+        </main>
       </div>
     </div>
   );

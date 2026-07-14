@@ -7,6 +7,9 @@
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "db:push": "prisma db push",
     "db:studio": "prisma studio"
   },
@@ -14,7 +17,10 @@
     "@anthropic-ai/sdk": "^0.39.0",
     "@auth/prisma-adapter": "^2.7.4",
     "@prisma/client": "^6.5.0",
+    "@upstash/ratelimit": "^2.0.8",
+    "@upstash/redis": "^1.38.0",
     "bcryptjs": "^3.0.2",
+    "jszip": "^3.10.1",
     "lucide-react": "^0.483.0",
     "mammoth": "^1.12.0",
     "next": "^15.5.20",
@@ -32,9 +38,12 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitest/coverage-v8": "^4.1.10",
     "eslint-config-next": "^15.5.20",
     "prisma": "^6.5.0",
     "tailwindcss": "^4.0.15",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^4.1.10"
   }
 }

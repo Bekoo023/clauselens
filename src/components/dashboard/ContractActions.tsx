@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Check, Copy, Link2, Link2Off, Loader2, Mail, Printer, Sparkles } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Check, Copy, Link2, Link2Off, Loader2, Mail, Printer, Sparkles, Trash2 } from "lucide-react";
 
 // Action bar on the contract detail page: share toggle, negotiation email, print/export.
 export function ContractActions({
@@ -16,6 +17,8 @@ export function ContractActions({
   initialEmail: string | null;
   isPro: boolean;
 }) {
+  const router = useRouter();
+  const [deleting, setDeleting] = useState(false);
   const [shareUrl, setShareUrl] = useState<string | null>(
     initialShareToken ? `${typeof window !== "undefined" ? window.location.origin : ""}/share/${initialShareToken}` : null
   );
@@ -82,6 +85,21 @@ export function ContractActions({
     setTimeout(() => setEmailCopied(false), 2000);
   }
 
+  async function deleteContract() {
+    if (!window.confirm("Permanently delete this contract and its analysis? This cannot be undone.")) return;
+    setDeleting(true);
+    setError(null);
+    try {
+      const res = await fetch(`/api/contracts/${contractId}`, { method: "DELETE" });
+      if (!res.ok) throw new Error();
+      router.push("/dashboard");
+      router.refresh();
+    } catch {
+      setError("Could not delete this contract. Please try again.");
+      setDeleting(false);
+    }
+  }
+
   return (
     <div className="print-hidden">
       {/* Action buttons */}
@@ -109,6 +127,11 @@ export function ContractActions({
 
         <button onClick={() => window.print()} className="btn border border-ink/15 hover:bg-ink/5">
           <Printer size={16} aria-hidden /> Export PDF
+        </button>
+
+        <button onClick={deleteContract} disabled={deleting} className="btn border border-risk-high/30 text-risk-high hover:bg-risk-high/10 disabled:opacity-60">
+          {deleting ? <Loader2 size={16} className="animate-spin" aria-hidden /> : <Trash2 size={16} aria-hidden />}
+          Delete
         </button>
       </div>
 

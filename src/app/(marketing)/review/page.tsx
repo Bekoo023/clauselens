@@ -10,6 +10,10 @@ export const metadata: Metadata = {
   description:
     "Free review guides for NDAs, freelance contracts, SaaS agreements, leases, and more. Common red flags, pre-signing checklists, and instant AI analysis.",
   alternates: { canonical: `${site.url}/review` },
+  openGraph: {
+    title: "Contract review guides: red flags & checklists per contract type",
+    description: "Free review guides for NDAs, freelance contracts, SaaS agreements, leases, and more.",
+  },
 };
 
 export default function ReviewIndexPage() {

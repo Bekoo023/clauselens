@@ -1,12 +1,14 @@
 import Link from "next/link";
+import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { ScanSearch } from "lucide-react";
+import { ScanSearch, Clock } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 import { analysisSchema } from "@/lib/analyze";
 import { ReportView } from "@/components/dashboard/ReportView";
 import { RiskBadge } from "@/components/dashboard/RiskBadge";
 import { site } from "@/lib/site";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 // Public, read-only contract report. This page is the growth loop:
 // every shared report carries the ClauseLens badge and a CTA.
@@ -28,6 +30,21 @@ export async function generateMetadata({ params }: { params: Promise<{ token: st
 
 export default async function SharedReportPage({ params }: { params: Promise<{ token: string }> }) {
   const { token } = await params;
+
+  // Shared links have no login gate by design, so this is the only thing
+  // standing between a public report and token-guessing/scraping traffic.
+  const ip = getClientIp(await headers());
+  const rate = await checkRateLimit("share", ip);
+  if (!rate.success) {
+    return (
+      <div className="mx-auto flex min-h-screen max-w-md flex-col items-center justify-center px-5 text-center">
+        <Clock size={28} className="text-ink-soft" aria-hidden />
+        <p className="mt-3 font-semibold">Too many requests</p>
+        <p className="mt-1 text-sm text-ink-soft">Please wait a moment before trying this link again.</p>
+      </div>
+    );
+  }
+
   const contract = await prisma.contract.findUnique({ where: { shareToken: token } });
   if (!contract || !contract.analysis) notFound();
 

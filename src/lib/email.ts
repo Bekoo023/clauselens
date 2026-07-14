@@ -13,7 +13,7 @@ export async function sendEmail({ to, subject, html }: { to: string; subject: st
     return;
   }
   await resend.emails.send({
-    from: "ClauseLens <noreply@clauselens.org>",
+    from: process.env.EMAIL_FROM ?? "ClauseLens <noreply@clauselens.org>",
     to,
     subject,
     html,

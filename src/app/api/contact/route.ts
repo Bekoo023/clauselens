@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { sendEmail } from "@/lib/email";
+import { checkRateLimit, rateLimitResponse, getClientIp } from "@/lib/rate-limit";
 
 const schema = z.object({
   name: z.string().min(1).max(100),
-  email: z.string().email(),
+  email: z.string().trim().email(),
   message: z.string().min(1).max(5000),
 });
 
@@ -18,6 +19,10 @@ function escapeHtml(value: string) {
 }
 
 export async function POST(req: Request) {
+  const ip = getClientIp(req.headers);
+  const rate = await checkRateLimit("contact", ip);
+  if (!rate.success) return rateLimitResponse(rate, "Too many messages sent. Please try again later.");
+
   const parsed = schema.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "Invalid input." }, { status: 400 });
   const { name, email, message } = parsed.data;

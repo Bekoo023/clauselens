@@ -7,6 +7,7 @@ import type { Plan } from "@prisma/client";
 import { UpgradeButtons } from "@/components/dashboard/UpgradeButtons";
 import { ManageBillingButton } from "@/components/dashboard/ManageBillingButton";
 import { PlaybookRules } from "@/components/dashboard/PlaybookRules";
+import { DeleteAccountButton } from "@/components/dashboard/DeleteAccountButton";
 
 export default async function SettingsPage() {
   const session = await auth();
@@ -72,9 +73,10 @@ export default async function SettingsPage() {
       <section className="card mt-4 border-risk-high/20 p-7">
         <h2 className="font-semibold">Danger zone</h2>
         <p className="mt-2 text-sm text-ink-soft">
-          Deleting your account permanently removes all contracts and analyses. Contact{" "}
-          <Link href="/contact" className="font-semibold text-brand hover:underline">support</Link> to proceed.
+          Deleting your account permanently removes all contracts and analyses. Need help instead? Contact{" "}
+          <Link href="/contact" className="font-semibold text-brand hover:underline">support</Link>.
         </p>
+        <DeleteAccountButton />
       </section>
     </div>
   );
