@@ -27,7 +27,7 @@ export function EmailVerificationBanner({ email }: { email: string }) {
         disabled={status !== "idle"}
         className="btn border border-ink/15 px-3 py-1.5 text-xs hover:bg-ink/5 disabled:opacity-60"
       >
-        {status === "idle" ? "Resend email" : status === "sending" ? "Sending…" : "Sent — check your inbox"}
+        {status === "idle" ? "Resend email" : status === "sending" ? "Sending…" : "Sent check your inbox"}
       </button>
     </div>
   );

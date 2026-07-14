@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "FAQ — how ClauseLens works, privacy & plans",
+  title: "FAQ how ClauseLens works, privacy & plans",
   description:
     "Answers about contract analysis accuracy, data privacy, supported contract types, plans and billing.",
 };
@@ -17,7 +17,7 @@ const groups = [
       },
       {
         q: "How accurate is the analysis?",
-        a: "ClauseLens uses a frontier AI model tuned with contract-specific playbooks. It reliably catches the high-impact patterns — liability, payment, IP, termination — and always quotes the exact contract language so you can verify every flag yourself. For high-risk contracts we explicitly recommend a human lawyer.",
+        a: "ClauseLens uses a frontier AI model tuned with contract-specific playbooks. It reliably catches the high-impact patterns liability, payment, IP, termination and always quotes the exact contract language so you can verify every flag yourself. For high-risk contracts we explicitly recommend a human lawyer.",
       },
       {
         q: "Is this legal advice?",
@@ -47,7 +47,7 @@ const groups = [
     items: [
       {
         q: "What does the free plan include?",
-        a: "One full analysis per month with risk score, summary and your top flagged clauses — enough to check the contract that's on your desk right now.",
+        a: "One full analysis per month with risk score, summary and your top flagged clauses enough to check the contract that's on your desk right now.",
       },
       {
         q: "Can I change or cancel my plan?",
@@ -96,7 +96,7 @@ export default function FAQPage() {
 
       <p className="mt-12 text-sm text-ink-soft">
         Anything else?{" "}
-        <Link href="/contact" className="font-semibold text-brand hover:underline">Contact us</Link> — we reply within one business day.
+        <Link href="/contact" className="font-semibold text-brand hover:underline">Contact us</Link> we reply within one business day.
       </p>
     </section>
   );

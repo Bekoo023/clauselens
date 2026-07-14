@@ -73,7 +73,7 @@ export default function NewAnalysisPage() {
             id="title"
             name="title"
             required
-            placeholder="e.g. Acme Corp — Services Agreement"
+            placeholder="e.g. Acme Corp Services Agreement"
             className="input mt-1.5"
           />
         </div>
@@ -121,7 +121,7 @@ export default function NewAnalysisPage() {
               <><FileUp size={16} aria-hidden /> {fileName ? `Replace ${fileName}` : "Upload PDF, DOCX, or TXT"}</>
             )}
           </button>
-          {fileName && <p className="mt-2 text-xs text-risk-low">✓ Extracted text from {fileName} — review below before analyzing.</p>}
+          {fileName && <p className="mt-2 text-xs text-risk-low">✓ Extracted text from {fileName} review below before analyzing.</p>}
         </div>
 
         <div>
@@ -143,7 +143,7 @@ export default function NewAnalysisPage() {
         {error && <p role="alert" className="text-sm text-risk-high">{error}</p>}
         <button type="submit" disabled={busy !== "idle"} className="btn btn-primary disabled:opacity-60">
           {busy === "analyzing" ? (
-            <><Loader2 size={16} className="animate-spin" aria-hidden /> Analyzing — about a minute…</>
+            <><Loader2 size={16} className="animate-spin" aria-hidden /> Analyzing about a minute…</>
           ) : (
             <><Sparkles size={16} aria-hidden /> Analyze contract</>
           )}

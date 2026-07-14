@@ -5,7 +5,7 @@ import { Reveal } from "@/components/marketing/Reveal";
 import { CTA } from "@/components/marketing/CTA";
 
 export const metadata: Metadata = {
-  title: "Features — AI contract analysis, risk scores & negotiation tips",
+  title: "Features AI contract analysis, risk scores & negotiation tips",
   description:
     "See how ClauseLens reviews contracts: clause-by-clause risk flags, missing clause detection, custom playbooks, team sharing and an API.",
 };
@@ -15,7 +15,7 @@ const sections = [
     icon: Gauge,
     title: "A risk score you can act on",
     text: "Every analysis starts with a single 0–100 score, built from the severity and number of flagged clauses. Green means sign, amber means negotiate, red means stop. You always know the next step before you read a single clause.",
-    detail: "Scores are calibrated per contract type — an NDA and a services agreement are judged by different standards.",
+    detail: "Scores are calibrated per contract type an NDA and a services agreement are judged by different standards.",
   },
   {
     icon: FileSearch,

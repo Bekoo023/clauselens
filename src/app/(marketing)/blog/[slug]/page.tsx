@@ -61,7 +61,7 @@ export default async function BlogPostPage({ params }: Props) {
       <div className="card mt-12 flex flex-col items-start gap-4 bg-ink-fixed p-8 text-white sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="font-semibold">Reading a contract right now?</p>
-          <p className="mt-1 text-sm text-white/70">Run it through ClauseLens — first analysis is free.</p>
+          <p className="mt-1 text-sm text-white/70">Run it through ClauseLens first analysis is free.</p>
         </div>
         <Link href="/register" className="btn btn-primary shrink-0">
           Analyze it free <ArrowRight size={16} aria-hidden />

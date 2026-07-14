@@ -71,7 +71,7 @@ export default function RegisterPage() {
       // continue to the dashboard and retry the upgrade from Settings.
       setLoading(false);
       setError(
-        (checkoutData.error ?? "Could not start checkout.") + " Your account was created — you can upgrade from Settings."
+        (checkoutData.error ?? "Could not start checkout.") + " Your account was created you can upgrade from Settings."
       );
       return;
     }
@@ -86,7 +86,7 @@ export default function RegisterPage() {
     >
       {selectedPlan && (
         <p className="mb-6 rounded-lg border border-brand/25 bg-brand/5 px-4 py-3 text-sm">
-          You selected <strong>{PLAN_LABELS[selectedPlan.plan]}</strong> — €{PRICING[selectedPlan.plan][selectedPlan.interval === "yearly" ? "yearly" : "monthly"]}/month
+          You selected <strong>{PLAN_LABELS[selectedPlan.plan]}</strong> €{PRICING[selectedPlan.plan][selectedPlan.interval === "yearly" ? "yearly" : "monthly"]}/month
           {selectedPlan.interval === "yearly" ? ", billed yearly" : ""}. Create your account to continue to checkout.
         </p>
       )}

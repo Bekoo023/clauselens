@@ -30,7 +30,7 @@ model User {
   stripeCustomerId     String?   @unique
   stripeSubscriptionId String?   @unique
   planRenewsAt         DateTime?
-  // Real Stripe subscription status (active, past_due, canceled, ...) — see src/lib/subscription.ts
+  // Real Stripe subscription status (active, past_due, canceled, ...) see src/lib/subscription.ts
   subscriptionStatus   String?
   // Usage metering: analyses used in the current calendar month
   analysesThisMonth    Int       @default(0)
@@ -45,7 +45,7 @@ model User {
   playbookRules        PlaybookRule[]
 }
 
-// Business-tier feature: a user's own "red lines" — every analysis is
+// Business-tier feature: a user's own "red lines" every analysis is
 // checked against each active rule (e.g. "never accept net-90 payment terms").
 model PlaybookRule {
   id        String   @id @default(cuid())

@@ -5,12 +5,16 @@ const isProd = process.env.NODE_ENV === "production";
 function buildCsp(): string {
   const directives: Record<string, string[]> = {
     "default-src": ["'self'"],
-    // Next's own runtime is external <script src> chunks (script-src 'self'
-    // covers it); JSON-LD <script type="application/ld+json"> data blocks
-    // aren't executable scripts, so they aren't subject to script-src.
-    "script-src": ["'self'", ...(isProd ? [] : ["'unsafe-eval'"])],
+    // Most marketing pages are statically prerendered at build time (no
+    // per-request middleware pass), so a nonce baked in at build time can
+    // never match a fresh per-request nonce that mismatch is what breaks
+    // the page in production. Next also injects its own inline <script>
+    // tags for RSC/hydration data on every page, static or not, so
+    // 'unsafe-inline' is required here (same tradeoff already made below
+    // for style-src).
+    "script-src": ["'self'", "'unsafe-inline'", ...(isProd ? [] : ["'unsafe-eval'"])],
     // Tailwind is static at build time, but a few components set dynamic
-    // inline `style` attributes (progress bars, gauges) — those need
+    // inline `style` attributes (progress bars, gauges) those need
     // 'unsafe-inline' in style-src specifically (not script-src).
     "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
     "font-src": ["'self'", "https://fonts.gstatic.com"],

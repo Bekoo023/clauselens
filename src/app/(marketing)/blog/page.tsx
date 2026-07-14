@@ -4,7 +4,7 @@ import { posts } from "@/lib/blog";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Blog — contract clauses explained in plain language",
+  title: "Blog contract clauses explained in plain language",
   description:
     "Guides, checklists and clause explainers for freelancers, agencies and startups. Understand every contract before you sign.",
   alternates: { canonical: `${site.url}/blog` },
@@ -22,7 +22,7 @@ export default function BlogPage() {
         Contracts, translated
       </h1>
       <p className="mt-4 max-w-xl text-lg text-ink-soft">
-        Clause explainers, red-flag guides and checklists — written for people
+        Clause explainers, red-flag guides and checklists written for people
         who sign contracts, not people who draft them.
       </p>
 

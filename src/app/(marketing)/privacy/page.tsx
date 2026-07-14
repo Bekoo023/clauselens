@@ -26,7 +26,7 @@ export default function PrivacyPage() {
         <div>
           <h2 className="text-lg font-semibold">3. Legal basis for processing</h2>
           <p className="mt-2 text-ink-soft">
-            We process account and contract data to perform our contract with you (Art. 6(1)(b) GDPR) — i.e. to
+            We process account and contract data to perform our contract with you (Art. 6(1)(b) GDPR) i.e. to
             provide the analysis you signed up for. We process billing data to comply with legal and tax
             obligations (Art. 6(1)(c)). We process aggregated usage data on the basis of our legitimate interest
             in improving the product (Art. 6(1)(f)), balanced against your right to privacy.

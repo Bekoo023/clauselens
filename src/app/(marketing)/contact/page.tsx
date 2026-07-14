@@ -24,7 +24,7 @@ export default function ContactPage() {
         <p className="eyebrow">Contact</p>
         <h1 className="h-display mt-4 text-4xl sm:text-5xl">Talk to a human</h1>
         <p className="mt-4 max-w-md text-lg text-ink-soft">
-          Questions about plans, Enterprise, partnerships or press — we reply
+          Questions about plans, Enterprise, partnerships or press we reply
           within one business day.
         </p>
         <div className="mt-8 space-y-4 text-sm">

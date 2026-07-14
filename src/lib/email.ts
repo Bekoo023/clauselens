@@ -9,7 +9,7 @@ const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KE
  */
 export async function sendEmail({ to, subject, html }: { to: string; subject: string; html: string }) {
   if (!resend) {
-    console.info(`[email] RESEND_API_KEY not set — skipping send. Would have sent "${subject}" to ${to}.`);
+    console.info(`[email] RESEND_API_KEY not set skipping send. Would have sent "${subject}" to ${to}.`);
     return;
   }
   await resend.emails.send({

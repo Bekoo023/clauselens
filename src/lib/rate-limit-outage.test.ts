@@ -25,7 +25,7 @@ vi.mock("@upstash/ratelimit", () => ({
 const { checkRateLimit } = await import("@/lib/rate-limit");
 
 describe("checkRateLimit during a real Redis outage (configured but erroring)", () => {
-  it("fails closed for the expensive analyze policy — never let unlimited traffic hit the paid AI API", async () => {
+  it("fails closed for the expensive analyze policy never let unlimited traffic hit the paid AI API", async () => {
     const result = await checkRateLimit("analyze", "user-1");
     expect(result.success).toBe(false);
   });
@@ -35,7 +35,7 @@ describe("checkRateLimit during a real Redis outage (configured but erroring)", 
     expect(result.success).toBe(false);
   });
 
-  it("still fails open for a non-AI policy like registration — an outage shouldn't block signups", async () => {
+  it("still fails open for a non-AI policy like registration an outage shouldn't block signups", async () => {
     const result = await checkRateLimit("register", "1.2.3.4");
     expect(result.success).toBe(true);
   });

@@ -112,7 +112,7 @@ export default async function ContractTypeReviewPage({ params }: { params: Promi
         </div>
 
         <p className="mt-10 text-xs text-ink-soft">
-          This guide is general information, not legal advice. Laws differ per jurisdiction — for high-stakes contracts, consult a qualified lawyer.
+          This guide is general information, not legal advice. Laws differ per jurisdiction for high-stakes contracts, consult a qualified lawyer.
         </p>
       </div>
 

@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 const steps = [
   {
     title: "Paste or upload",
-    text: "Drop in any contract — client agreement, NDA, SOW, lease. PDF, Word or plain text.",
+    text: "Drop in any contract: client agreement, NDA, SOW, lease. PDF, Word or plain text.",
   },
   {
     title: "AI reads every clause",
@@ -59,7 +59,7 @@ const features = [
   {
     icon: ShieldCheck,
     title: "Your playbook",
-    text: "Set your own rules — \"never accept net-90\" — and every contract gets checked against them.",
+    text: "Set your own rules  \"never accept net-90\"  and every contract gets checked against them.",
   },
   {
     icon: Users,
@@ -88,7 +88,7 @@ export default function HomePage() {
               </h1>
               <p className="mt-5 max-w-lg text-lg text-ink-soft">
                 Upload any contract and get a risk score, flagged clauses and
-                concrete negotiation tips — in plain language, not legalese.
+                concrete negotiation tips  in plain language, not legalese.
                 Built for freelancers, agencies and startups.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -113,7 +113,7 @@ export default function HomePage() {
             <Reveal>
               <p className="eyebrow text-center">How it works</p>
               <h2 className="h-display mx-auto mt-3 max-w-2xl text-center text-3xl sm:text-4xl">
-                From “what does this even mean?” to signed — safely
+                From “what does this even mean?” to signed. Safely!
               </h2>
             </Reveal>
             <div className="mt-12 grid gap-6 md:grid-cols-3">

@@ -66,7 +66,7 @@ const faqs = [
   },
   {
     q: "Is this legal advice?",
-    a: "No. ClauseLens provides plain-language information to help you understand contracts. For binding legal advice, we recommend consulting a qualified lawyer — and for high-risk contracts, we'll tell you exactly that.",
+    a: "No. ClauseLens provides plain-language information to help you understand contracts. For binding legal advice, we recommend consulting a qualified lawyer and for high-risk contracts, we'll tell you exactly that.",
   },
   {
     q: "Do you offer refunds?",

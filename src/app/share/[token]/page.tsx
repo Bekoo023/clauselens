@@ -18,11 +18,11 @@ export async function generateMetadata({ params }: { params: Promise<{ token: st
   const contract = await prisma.contract.findUnique({ where: { shareToken: token } });
   if (!contract) return { title: "Report not found" };
   return {
-    title: `Contract risk report: ${contract.title} — ClauseLens`,
+    title: `Contract risk report: ${contract.title} ClauseLens`,
     description: `AI contract analysis with risk score ${contract.riskScore}/100. Flagged clauses, plain-language explanations, and negotiation tips.`,
     robots: { index: false }, // reports contain client contract details — keep them out of search
     openGraph: {
-      title: `Contract risk report — risk score ${contract.riskScore}/100`,
+      title: `Contract risk report risk score ${contract.riskScore}/100`,
       description: "AI-powered contract review by ClauseLens.",
     },
   };
@@ -82,7 +82,7 @@ export default async function SharedReportPage({ params }: { params: Promise<{ t
         <div className="card mt-12 border-brand/25 bg-gradient-to-br from-brand/5 to-brand-bright/10 p-8 text-center">
           <h2 className="h-display text-xl">Reviewing a contract of your own?</h2>
           <p className="mx-auto mt-2 max-w-md text-sm text-ink-soft">
-            Get a risk score, flagged clauses, and negotiation tips in about a minute. Your first analysis is free — no credit card needed.
+            Get a risk score, flagged clauses, and negotiation tips in about a minute. Your first analysis is free no credit card needed.
           </p>
           <Link href="/register" className="btn btn-primary mt-5">Try ClauseLens free</Link>
         </div>

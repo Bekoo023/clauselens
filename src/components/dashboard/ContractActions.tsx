@@ -152,7 +152,7 @@ export function ContractActions({
         <div className="card mt-4 border-brand/30 bg-brand/5 p-5">
           <p className="text-sm font-semibold">Negotiation emails are a Pro feature</p>
           <p className="mt-1 text-sm text-ink-soft">
-            Get a ready-to-send email that requests concrete changes to the riskiest clauses — drafted from this exact analysis.
+            Get a ready-to-send email that requests concrete changes to the riskiest clauses drafted from this exact analysis.
           </p>
           <Link href="/dashboard/settings" className="btn btn-primary mt-3">Upgrade to Pro</Link>
         </div>
@@ -170,7 +170,7 @@ export function ContractActions({
             </button>
           </div>
           <pre className="mt-4 whitespace-pre-wrap rounded-xl bg-ink/5 p-5 font-sans text-sm leading-relaxed text-ink">{email}</pre>
-          <p className="mt-3 text-xs text-ink-soft">Review and personalize before sending — you know the relationship best.</p>
+          <p className="mt-3 text-xs text-ink-soft">Review and personalize before sending you know the relationship best.</p>
         </div>
       )}
     </div>

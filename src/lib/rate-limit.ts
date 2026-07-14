@@ -101,7 +101,7 @@ export async function checkRateLimit(policy: RateLimitPolicy, identifier: string
     if (!warnedNotConfigured) {
       warnedNotConfigured = true;
       console.warn(
-        "[rate-limit] UPSTASH_REDIS_REST_URL/TOKEN are not set — rate limiting is disabled (failing open) until Upstash is configured. See .env.example."
+        "[rate-limit] UPSTASH_REDIS_REST_URL/TOKEN are not set rate limiting is disabled (failing open) until Upstash is configured. See .env.example."
       );
     }
     return { success: true, limit: cfg.requests, remaining: cfg.requests, reset: Date.now() };

@@ -10,7 +10,7 @@ export function CTA() {
           Your next contract deserves a second pair of eyes
         </h2>
         <p className="relative mx-auto mt-4 max-w-xl text-white/70">
-          Analyze your first contract free. No credit card, no legal jargon — just clarity in 60 seconds.
+          Analyze your first contract free. No credit card, no legal jargon just clarity in 60 seconds.
         </p>
         <div className="relative mt-8">
           <Link href="/register" className="btn btn-primary text-base">

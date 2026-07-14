@@ -123,7 +123,7 @@ export default async function DashboardPage({
       {upgraded === "1" && (
         <div className="mt-5 flex items-center gap-3 rounded-2xl border border-risk-low/30 bg-risk-low/10 p-4 text-sm font-medium text-risk-low">
           <CheckCircle2 size={18} className="shrink-0" aria-hidden />
-          Payment successful — your plan has been upgraded.
+          Payment successful, your plan has been upgraded.
         </div>
       )}
 
@@ -146,7 +146,7 @@ export default async function DashboardPage({
           )}
           {Number.isFinite(limit) && usagePct >= 80 && (
             <p className="mt-2.5 text-xs text-risk-medium">
-              You&apos;re close to your monthly limit — <Link href="/dashboard/settings" className="font-semibold underline">upgrade for more</Link>.
+              You&apos;re close to your monthly limit <Link href="/dashboard/settings" className="font-semibold underline">upgrade for more</Link>.
             </p>
           )}
         </div>
@@ -206,7 +206,7 @@ export default async function DashboardPage({
           <div className="min-w-0 flex-1">
             <p className="text-xs font-semibold text-risk-high">Needs attention</p>
             <p className="truncate text-sm font-medium">
-              &ldquo;{highestRisk.title}&rdquo; scored {highestRisk.riskScore}/100 — your highest risk contract
+              &ldquo;{highestRisk.title}&rdquo; scored {highestRisk.riskScore}/100 your highest risk contract
             </p>
           </div>
           <ArrowUpRight size={18} className="shrink-0 text-ink-soft" aria-hidden />
