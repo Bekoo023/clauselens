@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { getStripe } from "@/lib/stripe";
+import { getServerEnv } from "@/lib/env";
 
 export async function POST() {
   const session = await auth();
@@ -15,7 +16,7 @@ export async function POST() {
   }
 
   const stripe = getStripe();
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+  const appUrl = getServerEnv().NEXT_PUBLIC_APP_URL;
 
   const portalSession = await stripe.billingPortal.sessions.create({
     customer: user.stripeCustomerId,

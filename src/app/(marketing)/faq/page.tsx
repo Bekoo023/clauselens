@@ -34,7 +34,7 @@ const groups = [
     items: [
       {
         q: "What happens to my contracts?",
-        a: "Contracts are encrypted in transit and at rest, visible only to your account (and teammates you invite). You can delete any contract permanently at any time from your dashboard.",
+        a: "Contracts are encrypted in transit and at rest and visible only to your account. You can share an individual analysis through a private link at any time, and delete any contract permanently from your dashboard.",
       },
       {
         q: "Are my contracts used to train AI models?",
@@ -55,7 +55,7 @@ const groups = [
       },
       {
         q: "Do you offer team or volume pricing?",
-        a: "Business includes 5 seats and unlimited analyses. For larger teams, SSO or a DPA, contact us for Enterprise pricing.",
+        a: "Business includes unlimited analyses on a single account today; team seats are coming soon. For multiple people, larger teams, SSO or a DPA, contact us for Enterprise pricing.",
       },
     ],
   },

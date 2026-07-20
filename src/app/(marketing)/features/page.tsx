@@ -7,14 +7,14 @@ import { CTA } from "@/components/marketing/CTA";
 export const metadata: Metadata = {
   title: "Features AI contract analysis, risk scores & negotiation tips",
   description:
-    "See how ClauseLens reviews contracts: clause-by-clause risk flags, missing clause detection, custom playbooks, team sharing and an API.",
+    "See how ClauseLens reviews contracts: clause-by-clause risk flags, missing clause detection, custom playbooks and shareable reports.",
 };
 
 const sections = [
   {
     icon: Gauge,
     title: "A risk score you can act on",
-    text: "Every analysis starts with a single 0–100 score, built from the severity and number of flagged clauses. Green means lower detected risk, amber means review recommended, red means high-priority issues to address. You always know where to focus before you read a single clause.",
+    text: "Every analysis starts with a single 0-100 score, built from the severity and number of flagged clauses. Green means lower detected risk, amber means review recommended, red means high-priority issues to address. You always know where to focus before you read a single clause.",
     detail: "Scores are calibrated per contract type: an NDA and a services agreement are judged by different standards.",
   },
   {
@@ -33,7 +33,7 @@ const sections = [
     icon: Handshake,
     title: "Negotiation tips that write themselves",
     text: "Every flagged clause comes with a concrete counter-proposal: what to ask for, why it's reasonable, and phrasing you can paste straight into your reply email.",
-    detail: "Pro users can export all tips as a single negotiation memo.",
+    detail: "Every tip is included in your exportable PDF report.",
   },
   {
     icon: ShieldCheck,
@@ -43,9 +43,9 @@ const sections = [
   },
   {
     icon: KeyRound,
-    title: "API & team workspaces",
-    text: "Invite up to five teammates on Business, share analyses internally, or integrate contract checks into your own workflow with the ClauseLens API.",
-    detail: "Rate-limited REST API with per-analysis webhooks.",
+    title: "Share links, with team seats and an API on the way",
+    text: "Share any analysis with a client or teammate through a private link today. Team seats and a rate-limited API with per-analysis webhooks are in development for Business.",
+    detail: "Coming soon to the Business plan.",
   },
 ];
 

@@ -11,6 +11,7 @@ import { RiskDistribution } from "@/components/dashboard/RiskDistribution";
 import { ContractSearch } from "@/components/dashboard/ContractSearch";
 import { ActivityChart, type DayCount } from "@/components/dashboard/ActivityChart";
 import { TypeBreakdown } from "@/components/dashboard/TypeBreakdown";
+import { PlanCheckoutRedirect } from "@/components/dashboard/PlanCheckoutRedirect";
 
 type ContractRow = {
   id: string;
@@ -44,10 +45,12 @@ function relativeDate(date: Date) {
 export default async function DashboardPage({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string; risk?: string; type?: string; sort?: string; upgraded?: string }>;
+  searchParams: Promise<{ q?: string; risk?: string; type?: string; sort?: string; upgraded?: string; plan?: string; interval?: string }>;
 }) {
   const session = await auth();
-  const { q, risk, type, sort, upgraded } = await searchParams;
+  const { q, risk, type, sort, upgraded, plan, interval } = await searchParams;
+  const pendingPlan = plan === "pro" || plan === "business" ? plan : null;
+  const pendingInterval = interval === "yearly" ? "yearly" : "monthly";
 
   const orderBy: Prisma.ContractOrderByWithRelationInput =
     sort === "oldest" ? { createdAt: "asc" }
@@ -119,6 +122,8 @@ export default async function DashboardPage({
           <FilePlus2 size={16} aria-hidden /> New analysis
         </Link>
       </div>
+
+      {pendingPlan && <PlanCheckoutRedirect plan={pendingPlan} interval={pendingInterval} />}
 
       {upgraded === "1" && (
         <div className="mt-5 flex items-center gap-3 rounded-2xl border border-risk-low/30 bg-risk-low/10 p-4 text-sm font-medium text-risk-low">

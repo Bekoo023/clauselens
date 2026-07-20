@@ -90,7 +90,16 @@ export default function RegisterPage() {
           {selectedPlan.interval === "yearly" ? ", billed yearly" : ""}. Create your account to continue to checkout.
         </p>
       )}
-      <button onClick={() => signIn("google", { callbackUrl: "/dashboard" })} className="btn w-full border border-ink/15 hover:bg-ink/5">
+      <button
+        onClick={() =>
+          signIn("google", {
+            callbackUrl: selectedPlan
+              ? `/dashboard?plan=${selectedPlan.plan}&interval=${selectedPlan.interval}`
+              : "/dashboard",
+          })
+        }
+        className="btn w-full border border-ink/15 hover:bg-ink/5"
+      >
         Continue with Google
       </button>
       <div className="my-6 flex items-center gap-3 text-xs text-ink-soft">
