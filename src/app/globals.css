@@ -208,12 +208,29 @@ body {
 }
 
 /* ---------- Mobile nav open transition ---------- */
+/* Panel unfolds from the top-right corner (where the toggle button sits),
+   then each link steps in right after so the list doesn't just pop in flat. */
 @keyframes menu-in {
-  from { opacity: 0; transform: translateY(-8px); }
+  from { opacity: 0; transform: scale(0.96) translateY(-8px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes menu-item-in {
+  from { opacity: 0; transform: translateY(-6px); }
   to { opacity: 1; transform: none; }
 }
 .menu-in {
-  animation: menu-in 0.2s ease-out;
+  transform-origin: top right;
+  animation: menu-in 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.menu-in .menu-item {
+  opacity: 0;
+  animation: menu-item-in 0.3s ease forwards;
+}
+.menu-toggle-icon {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.menu-toggle-icon.is-open {
+  transform: rotate(90deg);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -224,6 +241,8 @@ body {
   .card, .btn { transition: none; }
   .risk-gauge-arc { transition: none; }
   .menu-in { animation: none; }
+  .menu-in .menu-item { opacity: 1; animation: none; }
+  .menu-toggle-icon { transition: none; }
 }
 
 /* Print / "Export PDF": clean report output via the browser's print dialog */

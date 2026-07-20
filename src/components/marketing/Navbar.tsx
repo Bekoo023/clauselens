@@ -56,20 +56,42 @@ export function Navbar() {
           aria-expanded={open}
           aria-label={open ? "Close menu" : "Open menu"}
         >
-          {open ? <X /> : <Menu />}
+          <span className={`menu-toggle-icon inline-flex ${open ? "is-open" : ""}`}>
+            {open ? <X /> : <Menu />}
+          </span>
         </button>
       </nav>
 
       {open && (
         <div className="menu-in border-t border-ink/5 bg-paper px-5 py-4 md:hidden">
           <div className="flex flex-col gap-1">
-            {links.map((l) => (
-              <Link key={l.href} href={l.href} className="rounded-lg px-3 py-2 font-medium hover:bg-ink/5" onClick={() => setOpen(false)}>
+            {links.map((l, i) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="menu-item rounded-lg px-3 py-2 font-medium hover:bg-ink/5"
+                style={{ animationDelay: `${i * 30}ms` }}
+                onClick={() => setOpen(false)}
+              >
                 {l.label}
               </Link>
             ))}
-            <Link href="/login" className="rounded-lg px-3 py-2 font-medium hover:bg-ink/5" onClick={() => setOpen(false)}>Log in</Link>
-            <Link href="/register" className="btn btn-primary mt-2" onClick={() => setOpen(false)}>Analyze a contract free</Link>
+            <Link
+              href="/login"
+              className="menu-item rounded-lg px-3 py-2 font-medium hover:bg-ink/5"
+              style={{ animationDelay: `${links.length * 30}ms` }}
+              onClick={() => setOpen(false)}
+            >
+              Log in
+            </Link>
+            <Link
+              href="/register"
+              className="menu-item btn btn-primary mt-2"
+              style={{ animationDelay: `${(links.length + 1) * 30}ms` }}
+              onClick={() => setOpen(false)}
+            >
+              Analyze a contract free
+            </Link>
           </div>
         </div>
       )}

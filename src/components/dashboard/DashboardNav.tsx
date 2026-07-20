@@ -42,11 +42,11 @@ export function SidebarNav() {
   );
 }
 
-/** Mobile top bar nav — same active-state logic, compact layout. */
+/** Mobile top bar nav — even-width tab bar with icons, mirrors the desktop sidebar. */
 export function MobileNav() {
   const pathname = usePathname();
   return (
-    <div className="flex items-center gap-1.5 border-b border-ink/5 bg-surface p-3 sm:hidden">
+    <div className="flex items-stretch gap-1 border-b border-ink/5 bg-surface p-2 sm:hidden">
       {nav.map((n) => {
         const active = isActive(pathname, n.href);
         return (
@@ -54,10 +54,11 @@ export function MobileNav() {
             key={n.href}
             href={n.href}
             aria-current={active ? "page" : undefined}
-            className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
+            className={`flex flex-1 flex-col items-center gap-1 rounded-xl px-2 py-2 text-xs font-medium transition-colors ${
               active ? "bg-brand/10 text-brand" : "text-ink-soft hover:bg-ink/5"
             }`}
           >
+            <n.icon size={18} aria-hidden />
             {n.label}
           </Link>
         );

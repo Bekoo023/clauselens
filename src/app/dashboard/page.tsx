@@ -158,42 +158,42 @@ export default async function DashboardPage({
       )}
 
       {/* Stat cards */}
-      <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="card p-5">
-          <div className="flex items-center gap-2.5">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
+      <div className="mt-4 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+        <div className="card p-4 sm:p-5">
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand sm:h-9 sm:w-9">
               <FileText size={16} aria-hidden />
             </span>
-            <p className="text-xs font-medium text-ink-soft">Contracts analyzed</p>
+            <p className="text-xs font-medium leading-tight text-ink-soft">Contracts analyzed</p>
           </div>
-          <p className="h-display mt-2.5 text-3xl">{contracts.length}</p>
+          <p className="h-display mt-2.5 text-2xl sm:text-3xl">{contracts.length}</p>
         </div>
-        <div className="card p-5">
-          <div className="flex items-center gap-2.5">
-            <span className={`grid h-9 w-9 place-items-center rounded-xl ${avgLevel ? RISK_CHIP[avgLevel] : "bg-ink/5 text-ink-soft"}`}>
+        <div className="card p-4 sm:p-5">
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-xl sm:h-9 sm:w-9 ${avgLevel ? RISK_CHIP[avgLevel] : "bg-ink/5 text-ink-soft"}`}>
               <Gauge size={16} aria-hidden />
             </span>
-            <p className="text-xs font-medium text-ink-soft">Average risk score</p>
+            <p className="text-xs font-medium leading-tight text-ink-soft">Average risk score</p>
           </div>
-          <p className="h-display mt-2.5 text-3xl">{avgScore ?? "—"}</p>
+          <p className="h-display mt-2.5 text-2xl sm:text-3xl">{avgScore ?? "—"}</p>
         </div>
-        <div className="card p-5">
-          <div className="flex items-center gap-2.5">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
+        <div className="card p-4 sm:p-5">
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand sm:h-9 sm:w-9">
               <TrendingUp size={16} aria-hidden />
             </span>
-            <p className="text-xs font-medium text-ink-soft">Analyzed this week</p>
+            <p className="text-xs font-medium leading-tight text-ink-soft">Analyzed this week</p>
           </div>
-          <p className="h-display mt-2.5 text-3xl">{analyzedThisWeek}</p>
+          <p className="h-display mt-2.5 text-2xl sm:text-3xl">{analyzedThisWeek}</p>
         </div>
-        <div className="card p-5">
-          <div className="flex items-center gap-2.5">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 text-brand">
+        <div className="card p-4 sm:p-5">
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand sm:h-9 sm:w-9">
               <Zap size={16} aria-hidden />
             </span>
-            <p className="text-xs font-medium text-ink-soft">Analyses left this month</p>
+            <p className="text-xs font-medium leading-tight text-ink-soft">Analyses left this month</p>
           </div>
-          <p className="h-display mt-2.5 text-3xl">
+          <p className="h-display mt-2.5 text-2xl sm:text-3xl">
             {Number.isFinite(limit) ? Math.max(0, limit - used) : "∞"}
           </p>
         </div>
