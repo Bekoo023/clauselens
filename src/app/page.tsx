@@ -12,6 +12,7 @@ import {
 import { Navbar } from "@/components/marketing/Navbar";
 import { Footer } from "@/components/marketing/Footer";
 import { ContractScan } from "@/components/marketing/ContractScan";
+import { Parallax } from "@/components/marketing/Parallax";
 import { Reveal } from "@/components/marketing/Reveal";
 import { CTA } from "@/components/marketing/CTA";
 import { site } from "@/lib/site";
@@ -75,8 +76,12 @@ export default function HomePage() {
       <main>
         {/* ---------- Hero ---------- */}
         <section className="relative overflow-hidden">
-          <div className="bg-dot-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-[34rem]" aria-hidden />
-          <div className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-96 w-[56rem] -translate-x-1/2 rounded-full bg-brand/15 blur-3xl" aria-hidden />
+          <Parallax speed={0.05} className="bg-dot-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-[34rem]" aria-hidden />
+          <Parallax
+            speed={0.12}
+            className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-96 w-[56rem] -translate-x-1/2 rounded-full bg-brand/10 blur-3xl"
+            aria-hidden
+          />
           <div className="container-page grid items-center gap-14 py-16 sm:py-24 lg:grid-cols-2">
             <div>
               <p className="eyebrow">AI contract review</p>

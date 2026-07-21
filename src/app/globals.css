@@ -27,12 +27,24 @@
 
   --radius-card: 1.25rem;
 
-  --shadow-card: 0 1px 2px rgb(11 18 32 / 0.04), 0 8px 24px rgb(11 18 32 / 0.06);
-  --shadow-card-hover: 0 2px 4px rgb(11 18 32 / 0.05), 0 16px 40px rgb(11 18 32 / 0.1);
+  /* Restrained by default rest state reads mostly from the hairline border;
+     shadow only earns its keep on hover (card-hover) or true elevation. */
+  --shadow-card: 0 1px 2px rgb(11 18 32 / 0.03);
+  --shadow-card-hover: 0 12px 32px -8px rgb(11 18 32 / 0.14);
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* ---------- Lenis smooth scroll ---------- */
+/* Lenis drives easing itself once active, so native CSS smoothing must step
+   aside for it (its own recommended override) rather than fight it. */
+html.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+html.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 body {
@@ -84,39 +96,50 @@ body {
     border: 1px solid rgb(11 18 32 / 0.06);
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-card);
-    transition: box-shadow 0.25s ease, transform 0.25s ease;
+    transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .card-hover:hover {
     box-shadow: var(--shadow-card-hover);
-    transform: translateY(-2px);
+    border-color: rgb(11 18 32 / 0.09);
+    transform: translateY(-3px);
+  }
+  @media (prefers-color-scheme: dark) {
+    .card-hover:hover {
+      border-color: rgb(231 234 243 / 0.14);
+    }
   }
 
   @media (prefers-color-scheme: dark) {
     .card {
       border-color: rgb(231 234 243 / 0.08);
-      box-shadow: 0 1px 2px rgb(0 0 0 / 0.2), 0 8px 24px rgb(0 0 0 / 0.3);
+      box-shadow: 0 1px 2px rgb(0 0 0 / 0.15);
     }
     .card-hover:hover {
-      box-shadow: 0 2px 4px rgb(0 0 0 / 0.25), 0 16px 40px rgb(0 0 0 / 0.4);
+      box-shadow: 0 12px 32px -8px rgb(0 0 0 / 0.45);
     }
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-200;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold;
+    transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .btn:active {
     transform: scale(0.97);
   }
 
+  /* Solid, single-tone accent rather than a gradient/glow the restraint
+     itself is the "luxury" signal; motion stays refined but understated. */
   .btn-primary {
-    background: linear-gradient(135deg, var(--color-brand), var(--color-brand-bright));
+    background: var(--color-brand-deep);
     color: white;
-    box-shadow: 0 4px 14px rgb(91 91 214 / 0.35);
+    box-shadow: 0 1px 2px rgb(11 18 32 / 0.06);
   }
   .btn-primary:hover {
-    background: linear-gradient(135deg, var(--color-brand-deep), var(--color-brand));
-    box-shadow: 0 6px 20px rgb(91 91 214 / 0.45);
+    background: var(--color-brand);
+    box-shadow: 0 8px 20px -6px color-mix(in srgb, var(--color-brand) 45%, transparent);
     transform: translateY(-1px);
   }
   .btn-primary:active {
@@ -160,10 +183,12 @@ body {
 }
 
 /* ---------- Scroll reveal ---------- */
+/* A slightly longer, decelerating settle (rather than a quick linear fade)
+   reads as more deliberate/premium than the standard ease fade-up. */
 .reveal {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(22px) scale(0.985);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal.is-visible {
   opacity: 1;
