@@ -56,6 +56,7 @@ export default function NewAnalysisPage() {
       setBusy("idle");
       return;
     }
+    router.refresh();
     router.push(`/dashboard/contracts/${data.contractId}`);
   }
 
