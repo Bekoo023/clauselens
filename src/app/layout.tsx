@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { site } from "@/lib/site";
 import { NativeChrome } from "@/components/NativeChrome";
 import { AuroraBackdrop } from "@/components/AuroraBackdrop";
@@ -65,6 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ScrollProgress />
         <NativeChrome />
         {children}
+        <Analytics />
       </body>
     </html>
   );
