@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, FileSearch, Gauge, Handshake, KeyRound, ListChecks, ShieldCheck } from "lucide-react";
 import { Reveal } from "@/components/marketing/Reveal";
+import { SpotlightCard } from "@/components/marketing/SpotlightCard";
 import { CTA } from "@/components/marketing/CTA";
 
 export const metadata: Metadata = {
@@ -72,7 +73,7 @@ export default function FeaturesPage() {
       <section className="container-page grid gap-6 pb-20 md:grid-cols-2">
         {sections.map((s, i) => (
           <Reveal key={s.title} variant={i % 2 ? "right" : "left"} delay={(i % 2) * 60}>
-            <article className="card card-hover group h-full p-8">
+            <SpotlightCard className="card card-hover group h-full p-8">
               <span className="relative grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-brand to-brand-bright text-white shadow-[0_8px_20px_-10px_var(--color-brand)] transition-all duration-300 group-hover:scale-110 group-hover:-rotate-6 group-hover:shadow-[0_12px_28px_-8px_var(--color-brand)]">
                 <s.icon size={22} aria-hidden />
               </span>
@@ -81,7 +82,7 @@ export default function FeaturesPage() {
               <p className="mt-4 rounded-r-lg border-l-2 border-brand/40 bg-brand/[0.04] py-2 pl-3 text-sm text-ink-soft">
                 {s.detail}
               </p>
-            </article>
+            </SpotlightCard>
           </Reveal>
         ))}
       </section>

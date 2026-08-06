@@ -439,6 +439,100 @@ body {
   transform: rotate(90deg);
 }
 
+/* ---------- Scroll progress ---------- */
+/* Driven by one passive scroll listener writing a single transform, so it
+   never costs layout or paint. */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 60;
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--color-brand-deep), var(--color-brand-bright), var(--color-accent));
+}
+
+/* ---------- Word-by-word headline ---------- */
+/* Each word carries its own delay, set inline, so the line assembles instead
+   of fading in as one block. */
+@keyframes word-rise {
+  from { opacity: 0; transform: translateY(0.45em); }
+  to   { opacity: 1; transform: none; }
+}
+.word-rise {
+  display: inline-block;
+  opacity: 0;
+  animation: word-rise 0.55s var(--ease-out-quint) forwards;
+  animation-delay: var(--word-delay, 0ms);
+}
+
+/* ---------- Marquee ---------- */
+/* The track holds the list twice and slides exactly half its width, so the
+   loop point is seamless. Transform only, and it pauses on hover. */
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+/* ---------- Cursor spotlight ---------- */
+/* --mx/--my are written by a pointermove handler on the card itself, so the
+   work only happens while the pointer is actually over one card. */
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-out-quint);
+  background: radial-gradient(
+    16rem 16rem at var(--mx, 50%) var(--my, 0%),
+    color-mix(in srgb, var(--color-brand) 16%, transparent),
+    transparent 70%
+  );
+}
+.spotlight:hover::after {
+  opacity: 1;
+}
+
+/* ---------- Nav link ---------- */
+/* The indicator lives on the link, never as a sibling layered over it. */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 0.35rem;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--color-brand), var(--color-accent));
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s var(--ease-out-quint);
+}
+.nav-link:hover::after,
+.nav-link[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
 /* ---------- Page enter ---------- */
 /* For above-the-fold content, which is already in view before JS runs. */
 @keyframes rise-in {
@@ -465,6 +559,9 @@ body {
   .float-slow, .float-slower, .shimmer { animation: none; }
   .rise-in { animation: none; opacity: 1; }
   .btn-primary::after { display: none; }
+  .word-rise { animation: none; opacity: 1; }
+  .marquee-track { animation: none; }
+  .spotlight::after { display: none; }
 }
 
 /* Print / "Export PDF": clean report output via the browser's print dialog */

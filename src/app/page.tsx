@@ -14,6 +14,10 @@ import { Navbar } from "@/components/marketing/Navbar";
 import { Footer } from "@/components/marketing/Footer";
 import { ContractScan } from "@/components/marketing/ContractScan";
 import { Reveal } from "@/components/marketing/Reveal";
+import { WordReveal } from "@/components/marketing/WordReveal";
+import { CountUp } from "@/components/marketing/CountUp";
+import { SpotlightCard } from "@/components/marketing/SpotlightCard";
+import { Marquee } from "@/components/marketing/Marquee";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -69,9 +73,9 @@ const features = [
 ];
 
 const stats = [
-  { value: "60s", label: "Average analysis time" },
-  { value: "40+", label: "Risk patterns checked" },
-  { value: "0", label: "Legalese in the report" },
+  { to: 60, suffix: "s", label: "Average analysis time" },
+  { to: 40, suffix: "+", label: "Risk patterns checked" },
+  { to: 0, suffix: "", label: "Legalese in the report" },
 ];
 
 export default function HomePage() {
@@ -86,12 +90,10 @@ export default function HomePage() {
 
           <div className="container-page grid items-center gap-16 py-20 sm:py-28 lg:py-36 lg:grid-cols-2">
             <div>
-              <h1
-                className="h-display rise-in mt-6 text-5xl leading-[1.03] sm:text-6xl lg:text-7xl"
-                style={{ "--rise-delay": "60ms" } as React.CSSProperties}
-              >
-                Know what you&apos;re signing.{" "}
-                <span className="text-gradient">In 60 seconds.</span>
+              {/* No rise-in here: WordReveal animates the words themselves. */}
+              <h1 className="h-display text-5xl leading-[1.03] sm:text-6xl lg:text-7xl">
+                <WordReveal text={"Know what you're signing."} />{" "}
+                <WordReveal text="In 60 seconds." className="text-gradient" start={280} />
               </h1>
 
               <p
@@ -136,11 +138,24 @@ export default function HomePage() {
               <div className="card card-gradient-border grid gap-8 p-10 sm:grid-cols-3 sm:p-14">
                 {stats.map((s) => (
                   <div key={s.label} className="text-center">
-                    <p className="h-display text-gradient text-5xl sm:text-6xl">{s.value}</p>
+                    <p className="h-display text-gradient text-5xl sm:text-6xl">
+                      <CountUp to={s.to} suffix={s.suffix} />
+                    </p>
                     <p className="mt-3 text-base text-ink-soft">{s.label}</p>
                   </div>
                 ))}
               </div>
+            </Reveal>
+          </div>
+
+          {/* Ticker of the contract types the analyzer covers. Doubles as
+              internal linking to the /review guides. */}
+          <div className="pb-20 sm:pb-28">
+            <Reveal>
+              <p className="container-page mb-5 text-center text-sm text-ink-soft">
+                Trained on the contracts you actually sign
+              </p>
+              <Marquee />
             </Reveal>
           </div>
         </section>
@@ -159,7 +174,7 @@ export default function HomePage() {
             <div className="mt-16 grid gap-7 md:grid-cols-3">
               {steps.map((s, i) => (
                 <Reveal key={s.title} delay={i * 70}>
-                  <div className="card card-hover group relative h-full overflow-hidden p-9 sm:p-10">
+                  <SpotlightCard className="card card-hover group relative h-full overflow-hidden p-9 sm:p-10">
                     {/* Ghosted step numeral, a focal point beyond the text. */}
                     <span
                       aria-hidden
@@ -172,7 +187,7 @@ export default function HomePage() {
                     </span>
                     <h3 className="mt-3 text-xl font-semibold">{s.title}</h3>
                     <p className="mt-3 leading-relaxed text-ink-soft">{s.text}</p>
-                  </div>
+                  </SpotlightCard>
                 </Reveal>
               ))}
             </div>
@@ -190,13 +205,13 @@ export default function HomePage() {
           <div className="mt-16 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((f, i) => (
               <Reveal key={f.title} delay={(i % 3) * 60}>
-                <div className="card card-hover group h-full p-9 sm:p-10">
+                <SpotlightCard className="card card-hover group h-full p-9 sm:p-10">
                   <span className="relative grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-brand to-brand-bright text-white shadow-[0_8px_20px_-10px_var(--color-brand)] transition-all duration-300 group-hover:scale-110 group-hover:-rotate-6 group-hover:shadow-[0_12px_28px_-8px_var(--color-brand)]">
                     <f.icon size={22} aria-hidden />
                   </span>
                   <h3 className="mt-6 text-xl font-semibold">{f.title}</h3>
                   <p className="mt-3 leading-relaxed text-ink-soft">{f.text}</p>
-                </div>
+                </SpotlightCard>
               </Reveal>
             ))}
           </div>

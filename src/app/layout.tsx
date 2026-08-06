@@ -3,6 +3,7 @@ import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
 import { site } from "@/lib/site";
 import { NativeChrome } from "@/components/NativeChrome";
 import { AuroraBackdrop } from "@/components/AuroraBackdrop";
+import { ScrollProgress } from "@/components/ScrollProgress";
 import "./globals.css";
 
 // Self-hosted at build time. Replaces a render-blocking <link> to
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body>
         <AuroraBackdrop />
+        <ScrollProgress />
         <NativeChrome />
         {children}
       </body>
