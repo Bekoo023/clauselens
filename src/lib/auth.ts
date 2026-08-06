@@ -49,7 +49,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ],
   callbacks: {
     async signIn({ user, account }) {
-      // Google verifies the email address as part of its own sign-in flow —
+      // Google verifies the email address as part of its own sign-in flow -
       // the Auth.js adapter creates OAuth users with emailVerified: null
       // regardless, so we stamp it ourselves to trust the provider's
       // verification instead of requiring our own email-link flow for them.
@@ -71,12 +71,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
 
       // `auth()` also runs inside middleware, which executes on the Edge
-      // runtime — and the standard Prisma Client cannot run a query there
+      // runtime: and the standard Prisma Client cannot run a query there
       // (it throws PrismaClientValidationError, which previously took down
       // every request once the recheck window elapsed). Skip the DB recheck
       // there; every actual page/API route still calls `auth()` again in the
       // Node.js runtime right after middleware passes the request through,
-      // so the recheck still happens — just one hop later, not in Edge.
+      // so the recheck still happens: just one hop later, not in Edge.
       const isEdgeRuntime = process.env.NEXT_RUNTIME === "edge";
       const checkedAt = token.sessionVersionCheckedAt ?? 0;
       if (!isEdgeRuntime && token.id && Date.now() - checkedAt > SESSION_VERSION_RECHECK_MS) {

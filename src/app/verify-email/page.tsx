@@ -42,7 +42,7 @@ export default function VerifyEmailPage() {
       title="Verify your email"
       subtitle={<>Wrong account? <Link href="/login" className="font-semibold text-brand hover:underline">Log in</Link></>}
     >
-      {status === "checking" && <p className="text-sm text-ink-soft">Verifying your email…</p>}
+      {status === "checking" && <p className="text-sm text-ink-soft">Verifying your email...</p>}
       {status === "done" && (
         <div>
           <p className="text-sm text-ink-soft">Your email is verified. You can now run contract analyses.</p>

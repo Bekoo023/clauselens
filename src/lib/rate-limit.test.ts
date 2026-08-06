@@ -8,7 +8,7 @@ vi.mock("@/lib/env", () => ({
 const { checkRateLimit, rateLimitResponse, getClientIp } = await import("@/lib/rate-limit");
 
 describe("checkRateLimit when Redis was never configured", () => {
-  // Not configured is a deployment/setup state, not an outage — every policy
+  // Not configured is a deployment/setup state, not an outage: every policy
   // must fail OPEN here (including the AI routes), otherwise the app's core
   // feature is 100% unusable until someone sets up Upstash.
   it("fails open for the expensive analyze policy", async () => {

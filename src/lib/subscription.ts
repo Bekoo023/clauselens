@@ -4,7 +4,7 @@ import { buildPriceToPlanMap } from "@/lib/stripe";
 
 // Stripe's real Subscription object is the single source of truth for what
 // plan a user is on. Nothing here trusts client- or checkout-supplied
-// metadata for the plan itself — only the active Price ID on the
+// metadata for the plan itself: only the active Price ID on the
 // subscription decides that.
 
 // Statuses under which the user keeps paid access.
@@ -20,7 +20,7 @@ export type ResolvedSubscription = {
   /**
    * The plan to persist on the User record. FREE whenever access isn't
    * currently granted (covers past_due, unpaid, canceled, incomplete,
-   * incomplete_expired, paused) — a permanently or temporarily failed
+   * incomplete_expired, paused): a permanently or temporarily failed
    * payment never leaves paid access in place.
    */
   plan: Plan;

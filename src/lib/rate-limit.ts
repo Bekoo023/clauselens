@@ -80,17 +80,17 @@ let warnedNotConfigured = false;
 
 /**
  * Checks whether `identifier` (a userId or IP-derived key) is within the
- * limit for `policy`. Never throws — on Redis failure it applies the
+ * limit for `policy`. Never throws: on Redis failure it applies the
  * policy's fail-open/fail-closed default instead.
  *
  * Two distinct "no limiter" situations are handled differently:
- *  - Redis was never configured (no env vars set) — this is a deployment
+ *  - Redis was never configured (no env vars set): this is a deployment
  *    state, not an outage of something that's supposed to be there. Failing
  *    closed here would mean the AI features are 100% unusable until Upstash
  *    is set up, which is a worse outcome than temporarily having no rate
  *    limiting. So this always fails open, with a one-time warning so it's
  *    impossible to miss in the logs.
- *  - Redis IS configured but a call throws (network blip, outage) — this
+ *  - Redis IS configured but a call throws (network blip, outage): this
  *    follows the policy's fail-open/fail-closed default, so a real Redis
  *    outage still fails closed for the costly AI routes as intended.
  */
@@ -109,7 +109,7 @@ export async function checkRateLimit(policy: RateLimitPolicy, identifier: string
 
   const limiter = getLimiter(policy);
   if (!limiter) {
-    // Configured but the client couldn't be built — treat like a runtime failure.
+    // Configured but the client couldn't be built: treat like a runtime failure.
     if (cfg.failClosed) {
       return { success: false, limit: cfg.requests, remaining: 0, reset: Date.now() + 60_000 };
     }

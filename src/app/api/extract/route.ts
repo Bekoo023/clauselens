@@ -11,7 +11,7 @@ const MAX_PDF_PAGES = 300;
 const MAX_EXTRACTED_CHARS = 2_000_000; // hard backstop against runaway/zip-bomb output
 
 // Extracts plain text from an uploaded contract file (PDF, DOCX, or TXT).
-// The file itself is never stored — only the extracted text travels onward,
+// The file itself is never stored: only the extracted text travels onward,
 // and it's read straight into memory (no temp files touch disk, and the
 // filename is only ever used to pick a parser / for display, never as a path).
 export async function POST(req: Request) {

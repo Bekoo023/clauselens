@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 
 const schema = z.object({ rule: z.string().min(3).max(300) });
 
-// Add a playbook rule — Business plan only. Every future analysis is
+// Add a playbook rule: Business plan only. Every future analysis is
 // checked against every rule the user has saved here.
 export async function POST(req: Request) {
   const session = await auth();

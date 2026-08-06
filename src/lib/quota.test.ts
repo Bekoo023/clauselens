@@ -7,7 +7,7 @@ const users = new Map<string, FakeUser>();
 // A single global lock around every fake transaction. This stands in for
 // Postgres's row-level lock from `SELECT ... FOR UPDATE`: in production that
 // lock is scoped to one user's row, but for this test a global lock proves
-// the same property — reserveAnalysisSlot never lets two concurrent callers
+// the same property: reserveAnalysisSlot never lets two concurrent callers
 // both read-then-write past the same last unit of quota, as long as the
 // read-check-write all happens inside one serialized transaction (which is
 // exactly what reserveAnalysisSlot does).

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>ClauseLens</title>
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: #f8fafc;
+    color: #0b1220;
+    font-family: -apple-system, "Inter", system-ui, sans-serif;
+  }
+  .wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-align: center;
+    padding: 24px;
+  }
+  .mark {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #5b5bd6, #7c6cf0);
+  }
+  p { color: #3b4356; font-size: 14px; margin: 0; }
+  @media (prefers-color-scheme: dark) {
+    html, body { background: #0b1120; color: #e7eaf3; }
+    p { color: #a2aac0; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="mark"></div>
+    <p>Loading ClauseLens&hellip;</p>
+    <p>Check your connection if this takes more than a few seconds.</p>
+  </div>
+</body>
+</html>

@@ -26,7 +26,7 @@ export async function POST(req: Request) {
   const user = await prisma.user.findUnique({ where: { id: session.user.id } });
   if (!user) return NextResponse.json({ error: "Account not found." }, { status: 404 });
 
-  // Stripe is the source of truth for subscriptions — never let a signed-in
+  // Stripe is the source of truth for subscriptions: never let a signed-in
   // subscriber open a second, competing checkout session. Send them to the
   // billing portal (or a future change-plan flow) instead.
   if (user.plan !== "FREE" && user.stripeSubscriptionId) {

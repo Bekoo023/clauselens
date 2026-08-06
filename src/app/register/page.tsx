@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { AuthShell } from "@/components/ui/AuthShell";
+import { GoogleSignInButton } from "@/components/ui/GoogleSignInButton";
 import { PRICING } from "@/lib/plans";
 
 const PLAN_LABELS = { pro: "Pro", business: "Business" } as const;
@@ -90,18 +91,9 @@ export default function RegisterPage() {
           {selectedPlan.interval === "yearly" ? ", billed yearly" : ""}. Create your account to continue to checkout.
         </p>
       )}
-      <button
-        onClick={() =>
-          signIn("google", {
-            callbackUrl: selectedPlan
-              ? `/dashboard?plan=${selectedPlan.plan}&interval=${selectedPlan.interval}`
-              : "/dashboard",
-          })
-        }
-        className="btn w-full border border-ink/15 hover:bg-ink/5"
-      >
-        Continue with Google
-      </button>
+      <GoogleSignInButton
+        callbackUrl={selectedPlan ? `/dashboard?plan=${selectedPlan.plan}&interval=${selectedPlan.interval}` : "/dashboard"}
+      />
       <div className="my-6 flex items-center gap-3 text-xs text-ink-soft">
         <span className="h-px flex-1 bg-ink/10" /> or <span className="h-px flex-1 bg-ink/10" />
       </div>
@@ -121,7 +113,7 @@ export default function RegisterPage() {
         </div>
         {error && <p role="alert" className="text-sm text-risk-high">{error}</p>}
         <button type="submit" disabled={loading} className="btn btn-primary w-full disabled:opacity-60">
-          {loading ? "Creating account…" : selectedPlan ? "Create account and continue to checkout" : "Start analyzing free"}
+          {loading ? "Creating account..." : selectedPlan ? "Create account and continue to checkout" : "Start analyzing free"}
         </button>
         <p className="text-xs text-ink-soft">
           By signing up you agree to our <Link href="/terms" className="underline">terms</Link> and <Link href="/privacy" className="underline">privacy policy</Link>.

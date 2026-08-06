@@ -43,15 +43,15 @@ export function UpgradeButtons() {
           aria-pressed={yearly}
           className={`rounded-full px-3 py-1 transition-colors ${yearly ? "bg-ink-fixed text-white" : "text-ink-soft"}`}
         >
-          Yearly <span className="text-risk-low">−17%</span>
+          Yearly <span className="text-risk-low">-17%</span>
         </button>
       </div>
       <div className="mt-3 flex flex-wrap gap-3">
         <button onClick={() => upgrade("pro")} disabled={!!loading} className="btn btn-primary disabled:opacity-60">
-          {loading === "pro" ? "Redirecting…" : `Upgrade to Pro €${yearly ? PRICING.pro.yearly : PRICING.pro.monthly}/mo`}
+          {loading === "pro" ? "Redirecting..." : `Upgrade to Pro €${yearly ? PRICING.pro.yearly : PRICING.pro.monthly}/mo`}
         </button>
         <button onClick={() => upgrade("business")} disabled={!!loading} className="btn border border-ink/15 hover:bg-ink/5 disabled:opacity-60">
-          {loading === "business" ? "Redirecting…" : `Upgrade to Business €${yearly ? PRICING.business.yearly : PRICING.business.monthly}/mo`}
+          {loading === "business" ? "Redirecting..." : `Upgrade to Business €${yearly ? PRICING.business.yearly : PRICING.business.monthly}/mo`}
         </button>
       </div>
       {error && <p role="alert" className="mt-2 text-sm text-risk-high">{error}</p>}

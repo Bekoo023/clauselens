@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Check, Sparkles } from "lucide-react";
+import { Check, ChevronDown, Sparkles } from "lucide-react";
 import { CTA } from "@/components/marketing/CTA";
 
 const tiers = [
@@ -79,19 +79,28 @@ export default function PricingPage() {
 
   return (
     <>
-      <section className="container-page py-16 text-center sm:py-20">
-        <p className="eyebrow">Pricing</p>
-        <h1 className="h-display mx-auto mt-4 max-w-2xl text-4xl sm:text-5xl">
-          Cheaper than one bad clause
+      <section className="relative container-page py-20 text-center sm:py-24">
+        <p className="eyebrow rise-in">Pricing</p>
+        <h1
+          className="h-display rise-in mx-auto mt-4 max-w-2xl text-4xl sm:text-5xl lg:text-6xl"
+          style={{ "--rise-delay": "60ms" } as React.CSSProperties}
+        >
+          Cheaper than <span className="text-gradient">one bad clause</span>
         </h1>
-        <p className="mx-auto mt-5 max-w-xl text-lg text-ink-soft">
+        <p
+          className="rise-in mx-auto mt-6 max-w-xl text-lg text-ink-soft"
+          style={{ "--rise-delay": "120ms" } as React.CSSProperties}
+        >
           Start free. Upgrade when contracts become part of your routine.
         </p>
 
         {/* Billing toggle */}
-        <div className="relative mt-8 inline-grid grid-cols-2 rounded-full border border-ink/10 bg-surface p-1.5">
+        <div
+          className="rise-in relative mt-10 inline-grid grid-cols-2 rounded-full border border-ink/10 bg-surface p-1.5 shadow-card"
+          style={{ "--rise-delay": "180ms" } as React.CSSProperties}
+        >
           <span
-            className="absolute inset-y-1.5 left-1.5 w-[calc(50%-0.375rem)] rounded-full bg-ink-fixed transition-transform duration-300 ease-out"
+            className="absolute inset-y-1.5 left-1.5 w-[calc(50%-0.375rem)] rounded-full bg-gradient-to-r from-brand-deep via-brand to-brand-bright shadow-[0_6px_18px_-8px_var(--color-brand)] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
             style={{ transform: yearly ? "translateX(100%)" : "translateX(0)" }}
             aria-hidden
           />
@@ -109,27 +118,34 @@ export default function PricingPage() {
             onClick={() => setYearly(true)}
             aria-pressed={yearly}
           >
-            Yearly <span className="ml-1 text-risk-low">−17%</span>
+            Yearly <span className="ml-1 text-risk-low">-17%</span>
           </button>
         </div>
       </section>
 
-      <section className="container-page grid gap-6 pb-20 lg:grid-cols-3">
-        {tiers.map((t) => (
+      <section className="container-page grid items-stretch gap-6 pb-20 lg:grid-cols-3">
+        {tiers.map((t, i) => (
           <div
             key={t.name}
-            className={`card relative flex h-full flex-col p-8 ${t.highlight ? "border-brand/40 shadow-card-hover ring-1 ring-brand/30" : ""}`}
+            // The popular tier lifts out of the row. On three cards, height
+            // reads faster than colour.
+            className={`card card-hover relative flex h-full flex-col overflow-hidden p-8 ${
+              t.highlight ? "card-gradient-border shadow-glow lg:-my-3 lg:py-11" : ""
+            }`}
+            style={{ animationDelay: `${i * 100}ms` }}
           >
             {t.highlight && (
-              <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-brand to-brand-bright px-3 py-1 text-xs font-semibold text-white">
-                <Sparkles size={12} className="mr-1 inline" aria-hidden />
-                Most popular
-              </span>
+              <>
+                <span className="absolute left-1/2 top-0 z-10 -translate-x-1/2 rounded-b-lg bg-gradient-to-r from-brand-deep via-brand to-brand-bright px-3 py-1 text-xs font-semibold text-white shadow-[0_6px_18px_-8px_var(--color-brand)]">
+                  <Sparkles size={12} className="mr-1 inline" aria-hidden />
+                  Most popular
+                </span>
+              </>
             )}
-            <h2 className="text-lg font-semibold">{t.name}</h2>
-            <p className="mt-1 text-sm text-ink-soft">{t.blurb}</p>
-            <p className="mt-5">
-              <span className="h-display text-4xl">
+            <h2 className="relative text-lg font-semibold">{t.name}</h2>
+            <p className="relative mt-1 text-sm text-ink-soft">{t.blurb}</p>
+            <p className="relative mt-5">
+              <span className={`h-display text-5xl ${t.highlight ? "text-gradient" : ""}`}>
                 €{yearly ? t.yearly : t.monthly}
               </span>
               <span className="text-sm text-ink-soft"> /month</span>
@@ -137,17 +153,19 @@ export default function PricingPage() {
                 <span className="ml-2 text-xs text-ink-soft">billed yearly</span>
               )}
             </p>
-            <ul className="mt-6 flex-1 space-y-3">
+            <ul className="relative mt-6 flex-1 space-y-3">
               {t.features.map((f) => (
-                <li key={f} className="flex items-start gap-2 text-sm">
-                  <Check size={16} className="mt-0.5 shrink-0 text-risk-low" aria-hidden />
+                <li key={f} className="flex items-start gap-2.5 text-sm">
+                  <span className="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full bg-risk-low/15 text-risk-low">
+                    <Check size={11} strokeWidth={3} aria-hidden />
+                  </span>
                   {f}
                 </li>
               ))}
             </ul>
             <Link
               href={t.cta.href.includes("plan=") ? `${t.cta.href}&interval=${yearly ? "yearly" : "monthly"}` : t.cta.href}
-              className={`btn mt-8 w-full ${t.highlight ? "btn-primary" : "border border-ink/15 hover:bg-ink/5"}`}
+              className={`btn relative mt-8 w-full ${t.highlight ? "btn-primary" : "btn-glass"}`}
             >
               {t.cta.label}
             </Link>
@@ -155,14 +173,21 @@ export default function PricingPage() {
         ))}
       </section>
 
-      <section className="border-t border-ink/5 bg-surface py-16">
+      <hr className="divider-glow container-page" />
+
+      <section className="py-20">
         <div className="container-page max-w-3xl">
           <h2 className="h-display text-center text-2xl sm:text-3xl">Pricing questions</h2>
-          <div className="mt-8 space-y-3">
+          <div className="mt-10 space-y-3">
             {faqs.map((f) => (
-              <details key={f.q} className="card group p-5">
-                <summary className="cursor-pointer list-none font-semibold marker:content-none">
+              <details key={f.q} className="card card-hover group p-5 transition-all">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold marker:content-none">
                   {f.q}
+                  <ChevronDown
+                    size={18}
+                    aria-hidden
+                    className="shrink-0 text-ink-soft transition-transform duration-300 group-open:rotate-180 group-open:text-brand"
+                  />
                 </summary>
                 <p className="mt-3 text-sm leading-relaxed text-ink-soft">{f.a}</p>
               </details>

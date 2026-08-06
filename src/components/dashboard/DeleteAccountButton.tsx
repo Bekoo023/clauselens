@@ -44,7 +44,7 @@ export function DeleteAccountButton() {
           disabled={busy}
           className="btn border border-risk-high bg-risk-high/10 text-risk-high hover:bg-risk-high/20 disabled:opacity-60"
         >
-          {busy ? <><Loader2 size={16} className="animate-spin" aria-hidden /> Deleting…</> : "Yes, permanently delete my account"}
+          {busy ? <><Loader2 size={16} className="animate-spin" aria-hidden /> Deleting...</> : "Yes, permanently delete my account"}
         </button>
         <button onClick={() => setConfirming(false)} disabled={busy} className="btn border border-ink/15 hover:bg-ink/5 disabled:opacity-60">
           Cancel

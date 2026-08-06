@@ -35,7 +35,7 @@ export default function ForgotPasswordPage() {
             <input id="email" name="email" type="email" autoComplete="email" required className="input mt-1.5" />
           </div>
           <button type="submit" disabled={status === "sending"} className="btn btn-primary w-full disabled:opacity-60">
-            {status === "sending" ? "Sending…" : "Send reset link"}
+            {status === "sending" ? "Sending..." : "Send reset link"}
           </button>
         </form>
       )}

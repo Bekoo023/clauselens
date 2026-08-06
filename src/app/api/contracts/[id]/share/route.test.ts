@@ -52,7 +52,7 @@ describe("share link lifecycle", () => {
     expect(found?.id).toBe("contract-1");
   });
 
-  it("revoking the link makes it unresolvable — a shared link no longer works after being revoked", async () => {
+  it("revoking the link makes it unresolvable: a shared link no longer works after being revoked", async () => {
     const created = await POST(new Request("http://localhost"), { params: Promise.resolve({ id: "contract-1" }) });
     const { shareToken } = await created.json();
 

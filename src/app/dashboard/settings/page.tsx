@@ -28,7 +28,7 @@ export default async function SettingsPage() {
         <dl className="mt-4 space-y-2 text-sm">
           <div className="flex justify-between gap-4">
             <dt className="text-ink-soft">Name</dt>
-            <dd className="font-medium">{user.name ?? "—"}</dd>
+            <dd className="font-medium">{user.name ?? "-"}</dd>
           </div>
           <div className="flex justify-between gap-4">
             <dt className="text-ink-soft">Email</dt>

@@ -24,7 +24,7 @@ export async function POST(_req: Request, { params }: { params: Promise<{ id: st
     return NextResponse.json({ error: "Contract not found." }, { status: 404 });
   }
   if (!contract.analysis) {
-    return NextResponse.json({ error: "Nothing to share yet — the analysis is missing." }, { status: 400 });
+    return NextResponse.json({ error: "Nothing to share yet, the analysis is missing." }, { status: 400 });
   }
 
   const shareToken = contract.shareToken ?? randomBytes(16).toString("hex");

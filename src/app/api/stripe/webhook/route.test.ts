@@ -78,7 +78,7 @@ beforeEach(() => {
   retrieveSubscriptionMock.mockReset();
 });
 
-describe("POST /api/stripe/webhook — idempotency", () => {
+describe("POST /api/stripe/webhook: idempotency", () => {
   it("applies customer.subscription.updated exactly once for a given event id", async () => {
     const event = {
       id: "evt_1",
@@ -109,7 +109,7 @@ describe("POST /api/stripe/webhook — idempotency", () => {
     const secondBody = await second.json();
     expect(second.status).toBe(200);
     expect(secondBody.duplicate).toBe(true);
-    // Plan must be untouched by the resend — proves no duplicate action ran.
+    // Plan must be untouched by the resend: proves no duplicate action ran.
     expect(users.get("user-1")?.plan).toBe("PRO");
   });
 

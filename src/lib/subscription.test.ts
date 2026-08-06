@@ -63,6 +63,6 @@ describe("resolveSubscriptionState", () => {
     expect(result.planRecognized).toBe(false);
     expect(result.hasAccess).toBe(true);
     // Caller (webhook handler) is responsible for not touching `plan` when
-    // hasAccess && !planRecognized — verified in the webhook route.
+    // hasAccess && !planRecognized: verified in the webhook route.
   });
 });

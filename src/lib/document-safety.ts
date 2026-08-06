@@ -67,7 +67,7 @@ const MAX_DOCX_COMPRESSION_RATIO = 100;
 // check (a zip bomb is a tiny file that decompresses to gigabytes).
 type ZipEntryInternal = { _data?: { compressedSize?: number; uncompressedSize?: number } };
 
-/** Rejects a DOCX (zip) file that would decompress to an unreasonable size — a zip-bomb guard. */
+/** Rejects a DOCX (zip) file that would decompress to an unreasonable size: a zip-bomb guard. */
 export async function assertSafeDocx(buffer: Buffer): Promise<void> {
   let zip: JSZip;
   try {

@@ -1,12 +1,37 @@
 import type { Metadata } from "next";
+import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
 import { site } from "@/lib/site";
-import { SmoothScroll } from "@/components/SmoothScroll";
+import { NativeChrome } from "@/components/NativeChrome";
+import { AuroraBackdrop } from "@/components/AuroraBackdrop";
 import "./globals.css";
+
+// Self-hosted at build time. Replaces a render-blocking <link> to
+// fonts.googleapis.com plus two preconnects on every page load.
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
+  variable: "--font-bricolage",
+  display: "swap",
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-jetbrains",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name}  AI contract review in 60 seconds`,
+    default: `${site.name}: AI contract review in 60 seconds`,
     template: `%s · ${site.name}`,
   },
   description: site.description,
@@ -20,7 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: site.name,
-    title: `${site.name}  ${site.tagline}`,
+    title: `${site.name}: ${site.tagline}`,
     description: site.description,
     url: site.url,
   },
@@ -30,17 +55,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html
+      lang="en"
+      className={`${inter.variable} ${bricolage.variable} ${jetbrains.variable}`}
+    >
       <body>
-        <SmoothScroll />
+        <AuroraBackdrop />
+        <NativeChrome />
         {children}
       </body>
     </html>

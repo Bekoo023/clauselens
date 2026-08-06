@@ -33,7 +33,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Please log in first." }, { status: 401 });
   }
 
-  // Applies regardless of plan — even Business's "unlimited" monthly quota
+  // Applies regardless of plan: even Business's "unlimited" monthly quota
   // is still protected from abusive burst traffic against the paid
   // Anthropic API behind it.
   const rate = await checkRateLimit("analyze", session.user.id);
@@ -49,7 +49,7 @@ export async function POST(req: Request) {
   const user = await prisma.user.findUnique({ where: { id: session.user.id } });
   if (!user) return NextResponse.json({ error: "Account not found." }, { status: 404 });
 
-  // Only credentials accounts need explicit verification — Google sign-ins
+  // Only credentials accounts need explicit verification: Google sign-ins
   // are stamped verified via the provider's own check (see auth.ts signIn).
   if (user.passwordHash && !user.emailVerified) {
     return NextResponse.json(
@@ -101,7 +101,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ contractId: contract.id, analysis });
   } catch (err) {
-    // The analysis never got saved — give the reserved unit back.
+    // The analysis never got saved: give the reserved unit back.
     await releaseAnalysisSlot(user.id);
 
     if (err instanceof ContractTooLargeError || err instanceof AnalysisFailedError) {
@@ -109,7 +109,7 @@ export async function POST(req: Request) {
     }
     console.error("Contract analysis failed:", err instanceof Error ? err.message : "unknown error");
     return NextResponse.json(
-      { error: "Analysis failed. Nothing was deducted from your quota — please try again." },
+      { error: "Analysis failed. Nothing was deducted from your quota, please try again." },
       { status: 500 }
     );
   }

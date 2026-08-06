@@ -2,8 +2,32 @@
 
 import { useEffect, useRef } from "react";
 
-/** Wraps children in a scroll-triggered fade/slide reveal (IntersectionObserver). */
-export function Reveal({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+type Variant = "up" | "left" | "right" | "scale";
+
+const variantClass: Record<Variant, string> = {
+  up: "",
+  left: "reveal-left",
+  right: "reveal-right",
+  scale: "reveal-scale",
+};
+
+/**
+ * Scroll-triggered reveal (IntersectionObserver).
+ *
+ * `delay` staggers siblings across a mapped grid. It is set as a CSS custom
+ * property so the easing itself stays in globals.css.
+ */
+export function Reveal({
+  children,
+  className = "",
+  variant = "up",
+  delay = 0,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  variant?: Variant;
+  delay?: number;
+}) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -25,7 +49,11 @@ export function Reveal({ children, className = "" }: { children: React.ReactNode
   }, []);
 
   return (
-    <div ref={ref} className={`reveal ${className}`}>
+    <div
+      ref={ref}
+      className={`reveal ${variantClass[variant]} ${className}`}
+      style={delay ? ({ "--reveal-delay": `${delay}ms` } as React.CSSProperties) : undefined}
+    >
       {children}
     </div>
   );

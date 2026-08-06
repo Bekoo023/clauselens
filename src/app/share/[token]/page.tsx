@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ token: st
   return {
     title: `Contract risk report: ${contract.title} ClauseLens`,
     description: `AI contract analysis with risk score ${contract.riskScore}/100. Flagged clauses, plain-language explanations, and negotiation tips.`,
-    robots: { index: false }, // reports contain client contract details — keep them out of search
+    robots: { index: false }, // reports contain client contract details: keep them out of search
     openGraph: {
       title: `Contract risk report risk score ${contract.riskScore}/100`,
       description: "AI-powered contract review by ClauseLens.",
@@ -52,12 +52,14 @@ export default async function SharedReportPage({ params }: { params: Promise<{ t
   if (!parsed.success) notFound();
 
   return (
-    <div className="min-h-screen bg-paper">
+    <div className="min-h-screen">
       {/* Minimal header with badge */}
-      <header className="border-b border-ink/10">
+      <header className="sticky top-0 z-30 border-b border-ink/10 bg-paper/95">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-4">
-          <Link href="/" className="flex items-center gap-2 font-semibold">
-            <ScanSearch size={20} className="text-brand" aria-hidden />
+          <Link href="/" className="group flex items-center gap-2.5 font-semibold">
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-brand-deep via-brand to-brand-bright text-white shadow-[0_6px_18px_-8px_var(--color-brand)] transition-transform duration-500 group-hover:scale-110">
+              <ScanSearch size={17} aria-hidden />
+            </span>
             ClauseLens
           </Link>
           <Link href="/register" className="btn btn-primary px-4 py-2 text-xs">

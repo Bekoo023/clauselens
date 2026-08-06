@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 // Central, server-only environment validation. Import only from server code
-// (route handlers, server components, lib/*) — never from a "use client" file.
+// (route handlers, server components, lib/*): never from a "use client" file.
 // Validation is lazy (first access) rather than at module load so that
 // `next build`'s static page-data collection doesn't fail in environments
 // that intentionally build without full secrets (e.g. CI, preview builds).

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
-// Owner-only permanent delete — the privacy policy promises contracts can be
+// Owner-only permanent delete: the privacy policy promises contracts can be
 // deleted from the dashboard "at any time". `deleteMany` scoped to
 // `userId` doubles as the ownership check: another user's contract id
 // simply matches zero rows instead of ever being touched.

@@ -65,7 +65,7 @@ describe("assertSafeDocx", () => {
 
   it("rejects a zip bomb (extreme compression ratio)", async () => {
     const zip = new JSZip();
-    // Highly repetitive content compresses extremely well — a stand-in for a
+    // Highly repetitive content compresses extremely well: a stand-in for a
     // zip bomb without actually generating gigabytes of data in the test.
     const bomb = "A".repeat(5_000_000);
     zip.file("word/document.xml", bomb, { compression: "DEFLATE", compressionOptions: { level: 9 } });

@@ -30,7 +30,7 @@ beforeEach(() => {
   contracts = [{ id: "contract-1", userId: "owner-1" }];
 });
 
-describe("DELETE /api/contracts/[id] — authorization", () => {
+describe("DELETE /api/contracts/[id]: authorization", () => {
   it("lets the owner delete their own contract", async () => {
     mockSession("owner-1");
     const res = await DELETE(new Request("http://localhost"), { params: Promise.resolve({ id: "contract-1" }) });

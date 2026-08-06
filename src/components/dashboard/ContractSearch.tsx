@@ -37,7 +37,7 @@ export function ContractSearch({
         <input
           type="search"
           aria-label="Search contracts"
-          placeholder="Search contracts…"
+          placeholder="Search contracts..."
           defaultValue={initialQuery}
           onChange={(e) => apply({ q: e.target.value })}
           className="input pl-10"

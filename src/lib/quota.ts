@@ -12,7 +12,7 @@ export type QuotaReservation =
  *
  * `SELECT ... FOR UPDATE` takes a row lock on this user inside the
  * transaction, so a second concurrent request for the same user blocks
- * until the first commits — two simultaneous requests can never both claim
+ * until the first commits: two simultaneous requests can never both claim
  * the last unit of a free user's quota.
  */
 export async function reserveAnalysisSlot(userId: string): Promise<QuotaReservation> {

@@ -12,7 +12,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
   const session = await auth();
   // Checking `.id` (not just `.user`) matters: an invalidated JWT (e.g. the
   // account was just deleted, or the session predates a password reset)
-  // still has a `session.user` object — id is what's intentionally left
+  // still has a `session.user` object: id is what's intentionally left
   // unset in that case (see lib/auth.ts session callback).
   if (!session?.user?.id) redirect("/login");
 
@@ -24,9 +24,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}
-      <aside className="hidden w-60 flex-col border-r border-ink/5 bg-surface p-4 sm:flex">
-        <Link href="/" className="flex items-center gap-2 px-2 py-3 font-bold">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-brand to-brand-bright text-white">
+      <aside className="sticky top-0 hidden h-screen w-60 flex-col border-r border-ink/5 bg-surface/95 p-4 sm:flex">
+        <Link href="/" className="group flex items-center gap-2.5 px-2 py-3 font-bold">
+          <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-brand-deep via-brand to-brand-bright text-white shadow-[0_6px_18px_-8px_var(--color-brand)] transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
             <ScanSearch size={18} aria-hidden />
           </span>
           <span className="h-display text-lg">ClauseLens</span>
@@ -53,7 +53,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
               await signOut({ redirectTo: "/" });
             }}
           >
-            <button className="mt-1 w-full rounded-xl px-3 py-2 text-left text-sm font-medium text-ink-soft hover:bg-ink/5">
+            <button className="mt-1 w-full rounded-xl px-3 py-2 text-left text-sm font-medium text-ink-soft transition-colors duration-300 hover:bg-ink/5 hover:text-ink">
               Log out
             </button>
           </form>

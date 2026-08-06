@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export type DayCount = { date: string; label: string; count: number };
 
-// Single-series bar chart (count per day) — one hue for magnitude, no legend
+// Single-series bar chart (count per day): one hue for magnitude, no legend
 // needed since the card title above already names the series.
 export function ActivityChart({ data }: { data: DayCount[] }) {
   const [hover, setHover] = useState<number | null>(null);
@@ -23,8 +23,8 @@ export function ActivityChart({ data }: { data: DayCount[] }) {
             <div
               onMouseEnter={() => setHover(i)}
               onMouseLeave={() => setHover(null)}
-              className={`w-full rounded-t-[3px] transition-colors ${d.count > 0 ? "bg-brand/60 hover:bg-brand" : "bg-ink/8"}`}
-              style={{ height: `${d.count > 0 ? Math.max(8, (d.count / max) * 100) : 3}%` }}
+              className={`meter-fill-h w-full rounded-t-[3px] ${d.count > 0 ? "bg-brand/60 hover:bg-brand" : "bg-ink/8"}`}
+              style={{ height: `${d.count > 0 ? Math.max(8, (d.count / max) * 100) : 3}%`, transitionDelay: `${i * 0.02}s` }}
             />
           </div>
         ))}

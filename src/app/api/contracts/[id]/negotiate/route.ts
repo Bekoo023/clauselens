@@ -7,7 +7,7 @@ import { checkRateLimit, rateLimitResponse } from "@/lib/rate-limit";
 export const maxDuration = 60;
 
 // Drafts a ready-to-send negotiation email from the stored analysis.
-// Pro/Business only — the strongest single upgrade trigger in the product.
+// Pro/Business only: the strongest single upgrade trigger in the product.
 export async function POST(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   const session = await auth();
   if (!session?.user?.id) {

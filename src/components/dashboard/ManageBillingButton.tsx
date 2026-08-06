@@ -25,7 +25,7 @@ export function ManageBillingButton() {
     <div>
       <button onClick={open} disabled={loading} className="btn mt-4 border border-ink/15 hover:bg-ink/5 disabled:opacity-60">
         {loading ? (
-          <><Loader2 size={16} className="animate-spin" aria-hidden /> Opening…</>
+          <><Loader2 size={16} className="animate-spin" aria-hidden /> Opening...</>
         ) : (
           "Manage or cancel subscription"
         )}

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ClauseLens</string>
+    <string name="title_activity_main">ClauseLens</string>
+    <string name="package_name">org.clauselens.app</string>
+    <string name="custom_url_scheme">org.clauselens.app</string>
+</resources>

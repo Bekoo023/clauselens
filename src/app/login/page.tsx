@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { AuthShell } from "@/components/ui/AuthShell";
+import { GoogleSignInButton } from "@/components/ui/GoogleSignInButton";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -31,9 +32,7 @@ export default function LoginPage() {
       title="Welcome back"
       subtitle={<>New here? <Link href="/register" className="font-semibold text-brand hover:underline">Create a free account</Link></>}
     >
-      <button onClick={() => signIn("google", { callbackUrl: "/dashboard" })} className="btn w-full border border-ink/15 hover:bg-ink/5">
-        Continue with Google
-      </button>
+      <GoogleSignInButton callbackUrl="/dashboard" />
       <div className="my-6 flex items-center gap-3 text-xs text-ink-soft">
         <span className="h-px flex-1 bg-ink/10" /> or <span className="h-px flex-1 bg-ink/10" />
       </div>
@@ -51,7 +50,7 @@ export default function LoginPage() {
         </div>
         {error && <p role="alert" className="text-sm text-risk-high">{error}</p>}
         <button type="submit" disabled={loading} className="btn btn-primary w-full disabled:opacity-60">
-          {loading ? "Signing in…" : "Log in"}
+          {loading ? "Signing in..." : "Log in"}
         </button>
       </form>
     </AuthShell>

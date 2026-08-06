@@ -117,7 +117,7 @@ export default function NewAnalysisPage() {
             className="btn w-full justify-center border border-dashed border-ink/25 py-4 hover:bg-ink/5 disabled:opacity-60"
           >
             {busy === "extracting" ? (
-              <><Loader2 size={16} className="animate-spin" aria-hidden /> Reading file…</>
+              <><Loader2 size={16} className="animate-spin" aria-hidden /> Reading file...</>
             ) : (
               <><FileUp size={16} aria-hidden /> {fileName ? `Replace ${fileName}` : "Upload PDF, DOCX, or TXT"}</>
             )}
@@ -135,7 +135,7 @@ export default function NewAnalysisPage() {
             rows={12}
             value={body}
             onChange={(e) => setBody(e.target.value)}
-            placeholder="…or paste the full contract text here"
+            placeholder="...or paste the full contract text here"
             className="input mt-1.5 py-3 font-mono text-xs leading-relaxed"
           />
           {body.length > 0 && <p className="mt-1 text-right text-xs text-ink-soft">{body.length.toLocaleString()} characters</p>}
@@ -144,7 +144,7 @@ export default function NewAnalysisPage() {
         {error && <p role="alert" className="text-sm text-risk-high">{error}</p>}
         <button type="submit" disabled={busy !== "idle"} className="btn btn-primary disabled:opacity-60">
           {busy === "analyzing" ? (
-            <><Loader2 size={16} className="animate-spin" aria-hidden /> Analyzing about a minute…</>
+            <><Loader2 size={16} className="animate-spin" aria-hidden /> Analyzing about a minute...</>
           ) : (
             <><Sparkles size={16} aria-hidden /> Analyze contract</>
           )}

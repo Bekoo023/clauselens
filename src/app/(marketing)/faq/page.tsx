@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ChevronDown } from "lucide-react";
+import { Reveal } from "@/components/marketing/Reveal";
 
 export const metadata: Metadata = {
   title: "FAQ how ClauseLens works, privacy & plans",
@@ -25,7 +27,7 @@ const groups = [
       },
       {
         q: "How long does an analysis take?",
-        a: "Typically 30–90 seconds, depending on contract length.",
+        a: "Typically 30-90 seconds, depending on contract length.",
       },
     ],
   },
@@ -75,20 +77,34 @@ export default function FAQPage() {
   };
 
   return (
-    <section className="container-page max-w-3xl py-16 sm:py-20">
+    <section className="relative container-page max-w-3xl py-20 sm:py-24">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <p className="eyebrow">FAQ</p>
-      <h1 className="h-display mt-4 text-4xl sm:text-5xl">Questions, answered</h1>
+      <p className="eyebrow rise-in">FAQ</p>
+      <h1
+        className="h-display rise-in mt-4 text-4xl sm:text-5xl lg:text-6xl"
+        style={{ "--rise-delay": "60ms" } as React.CSSProperties}
+      >
+        Questions, <span className="text-gradient">answered</span>
+      </h1>
 
       {groups.map((g) => (
-        <div key={g.title} className="mt-10">
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-ink-soft">{g.title}</h2>
-          <div className="mt-4 space-y-3">
-            {g.items.map((i) => (
-              <details key={i.q} className="card p-5">
-                <summary className="cursor-pointer list-none font-semibold marker:content-none">{i.q}</summary>
-                <p className="mt-3 text-sm leading-relaxed text-ink-soft">{i.a}</p>
-              </details>
+        <div key={g.title} className="mt-12">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-ink-soft">{g.title}</h2>
+          <div className="mt-5 space-y-3">
+            {g.items.map((i, idx) => (
+              <Reveal key={i.q} delay={idx * 45}>
+                <details className="card card-hover group p-5">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold marker:content-none">
+                    {i.q}
+                    <ChevronDown
+                      size={18}
+                      aria-hidden
+                      className="shrink-0 text-ink-soft transition-transform duration-300 group-open:rotate-180 group-open:text-brand"
+                    />
+                  </summary>
+                  <p className="mt-3 text-sm leading-relaxed text-ink-soft">{i.a}</p>
+                </details>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -96,7 +112,7 @@ export default function FAQPage() {
 
       <p className="mt-12 text-sm text-ink-soft">
         Anything else?{" "}
-        <Link href="/contact" className="font-semibold text-brand hover:underline">Contact us</Link> we reply within one business day.
+        <Link href="/contact" className="link-underline font-semibold text-brand">Contact us</Link> we reply within one business day.
       </p>
     </section>
   );

@@ -118,7 +118,7 @@ export function ContractActions({
         {!email && (
           <button onClick={generateEmail} disabled={emailBusy} className="btn btn-primary disabled:opacity-60">
             {emailBusy ? (
-              <><Loader2 size={16} className="animate-spin" aria-hidden /> Drafting…</>
+              <><Loader2 size={16} className="animate-spin" aria-hidden /> Drafting...</>
             ) : (
               <><Mail size={16} aria-hidden /> Draft negotiation email{!isPro && <Sparkles size={13} aria-hidden className="opacity-70" />}</>
             )}

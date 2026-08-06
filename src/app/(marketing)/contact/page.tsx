@@ -58,7 +58,7 @@ export default function ContactPage() {
               <textarea id="message" name="message" rows={5} required className="input mt-1.5" />
             </div>
             <button type="submit" disabled={status === "sending"} className="btn btn-primary w-full disabled:opacity-60">
-              {status === "sending" ? "Sending…" : <>Send message <Send size={16} aria-hidden /></>}
+              {status === "sending" ? "Sending..." : <>Send message <Send size={16} aria-hidden /></>}
             </button>
             {status === "error" && (
               <p className="text-sm text-risk-high">Something went wrong. Email us at support@clauselens.org instead.</p>

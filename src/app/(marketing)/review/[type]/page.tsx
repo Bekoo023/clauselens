@@ -59,7 +59,7 @@ export default async function ContractTypeReviewPage({ params }: { params: Promi
           <p className="mt-1 text-sm text-ink-soft">
             Upload it and get a risk score, flagged clauses, and negotiation tips in about a minute. First analysis free.
           </p>
-          <Link href="/register" className="btn btn-primary mt-4">Analyze my {t.midSentenceName} →</Link>
+          <Link href="/register" className="btn btn-primary mt-4">Analyze my {t.midSentenceName}</Link>
         </div>
 
         {/* Red flags */}
@@ -107,7 +107,7 @@ export default async function ContractTypeReviewPage({ params }: { params: Promi
             </Link>
           ))}
           <Link href="/review" className="rounded-full border border-ink/15 px-4 py-2 text-sm text-ink-soft hover:bg-ink/5">
-            All types →
+            All types
           </Link>
         </div>
 

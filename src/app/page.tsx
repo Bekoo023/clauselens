@@ -7,14 +7,13 @@ import {
   Handshake,
   ListChecks,
   ShieldCheck,
+  Sparkles,
   Users,
 } from "lucide-react";
 import { Navbar } from "@/components/marketing/Navbar";
 import { Footer } from "@/components/marketing/Footer";
 import { ContractScan } from "@/components/marketing/ContractScan";
-import { Parallax } from "@/components/marketing/Parallax";
 import { Reveal } from "@/components/marketing/Reveal";
-import { CTA } from "@/components/marketing/CTA";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -39,7 +38,7 @@ const steps = [
 const features = [
   {
     icon: Gauge,
-    title: "Risk score 0–100",
+    title: "Risk score 0-100",
     text: "One number that tells you instantly how much attention a contract needs before you sign it.",
   },
   {
@@ -60,13 +59,19 @@ const features = [
   {
     icon: ShieldCheck,
     title: "Your playbook",
-    text: "Set your own rules  \"never accept net-90\"  and every contract gets checked against them.",
+    text: "Set your own rules, like 'never accept net-90', and every contract gets checked against them.",
   },
   {
     icon: Users,
     title: "Built for teams",
     text: "Share analyses with your team or your client, with a report link that speaks for itself.",
   },
+];
+
+const stats = [
+  { value: "60s", label: "Average analysis time" },
+  { value: "40+", label: "Risk patterns checked" },
+  { value: "0", label: "Legalese in the report" },
 ];
 
 export default function HomePage() {
@@ -76,60 +81,97 @@ export default function HomePage() {
       <main>
         {/* ---------- Hero ---------- */}
         <section className="relative overflow-hidden">
-          <Parallax speed={0.05} className="bg-dot-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-[34rem]" aria-hidden />
-          <Parallax
-            speed={0.12}
-            className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-96 w-[56rem] -translate-x-1/2 rounded-full bg-brand/10 blur-3xl"
-            aria-hidden
-          />
-          <div className="container-page grid items-center gap-14 py-16 sm:py-24 lg:grid-cols-2">
+          {/* Static texture. Colour comes from the app backdrop. */}
+          <div className="bg-dot-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-[38rem]" aria-hidden />
+
+          <div className="container-page grid items-center gap-16 py-20 sm:py-28 lg:py-36 lg:grid-cols-2">
             <div>
-              <p className="eyebrow">AI contract review</p>
-              <h1 className="h-display mt-4 text-4xl leading-[1.08] sm:text-5xl lg:text-6xl">
+              <h1
+                className="h-display rise-in mt-6 text-5xl leading-[1.03] sm:text-6xl lg:text-7xl"
+                style={{ "--rise-delay": "60ms" } as React.CSSProperties}
+              >
                 Know what you&apos;re signing.{" "}
-                <span className="bg-gradient-to-r from-brand to-brand-bright bg-clip-text text-transparent">
-                  In 60 seconds.
-                </span>
+                <span className="text-gradient">In 60 seconds.</span>
               </h1>
-              <p className="mt-5 max-w-lg text-lg text-ink-soft">
+
+              <p
+                className="rise-in mt-7 max-w-xl text-xl leading-relaxed text-ink-soft"
+                style={{ "--rise-delay": "120ms" } as React.CSSProperties}
+              >
                 Upload any contract and get a risk score, flagged clauses and
-                concrete negotiation tips  in plain language, not legalese.
+                concrete negotiation tips in plain language, not legalese.
                 Built for freelancers, agencies and startups.
               </p>
-              <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Link href="/register" className="btn btn-primary text-base">
-                  Analyze a contract free <ArrowRight size={18} aria-hidden />
+
+              <div
+                className="rise-in mt-10 flex flex-wrap items-center gap-3"
+                style={{ "--rise-delay": "180ms" } as React.CSSProperties}
+              >
+                <Link href="/register" className="btn btn-primary group px-7 py-3.5 text-base">
+                  Analyze a contract free
+                  <ArrowRight size={18} aria-hidden className="transition-transform duration-300 group-hover:translate-x-1" />
                 </Link>
-                <Link href="/features" className="btn btn-ghost text-base">
+                <Link href="/features" className="btn btn-glass px-7 py-3.5 text-base">
+                  <Sparkles size={16} aria-hidden className="text-brand" />
                   See how it works
                 </Link>
               </div>
-              <p className="mt-4 text-sm text-ink-soft">
+
+              <p
+                className="rise-in mt-6 text-sm text-ink-soft"
+                style={{ "--rise-delay": "240ms" } as React.CSSProperties}
+              >
                 Free plan available · No credit card required
               </p>
             </div>
-            <ContractScan />
+
+            <div className="rise-in float-slower" style={{ "--rise-delay": "200ms" } as React.CSSProperties}>
+              <ContractScan />
+            </div>
+          </div>
+
+          {/* Stats strip, so the fold does not drop straight into a text wall. */}
+          <div className="container-page pb-20 sm:pb-28">
+            <Reveal>
+              <div className="card card-gradient-border grid gap-8 p-10 sm:grid-cols-3 sm:p-14">
+                {stats.map((s) => (
+                  <div key={s.label} className="text-center">
+                    <p className="h-display text-gradient text-5xl sm:text-6xl">{s.value}</p>
+                    <p className="mt-3 text-base text-ink-soft">{s.label}</p>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
           </div>
         </section>
 
+        <hr className="divider-glow container-page" />
+
         {/* ---------- How it works ---------- */}
-        <section className="border-y border-ink/5 bg-surface py-20">
+        <section className="relative py-28 sm:py-36">
           <div className="container-page">
             <Reveal>
               <p className="eyebrow text-center">How it works</p>
-              <h2 className="h-display mx-auto mt-3 max-w-2xl text-center text-3xl sm:text-4xl">
-                From “what does this even mean?” to signed. Safely!
+              <h2 className="h-display mx-auto mt-4 max-w-3xl text-center text-4xl sm:text-5xl">
+                From &quot;what does this even mean?&quot; to signed. Safely!
               </h2>
             </Reveal>
-            <div className="mt-12 grid gap-6 md:grid-cols-3">
+            <div className="mt-16 grid gap-7 md:grid-cols-3">
               {steps.map((s, i) => (
-                <Reveal key={s.title}>
-                  <div className="card card-hover h-full p-7">
+                <Reveal key={s.title} delay={i * 70}>
+                  <div className="card card-hover group relative h-full overflow-hidden p-9 sm:p-10">
+                    {/* Ghosted step numeral, a focal point beyond the text. */}
+                    <span
+                      aria-hidden
+                      className="h-display pointer-events-none absolute -right-2 -top-6 text-[7rem] leading-none text-ink/[0.04] transition-all duration-700 group-hover:-translate-y-1 group-hover:text-brand/10"
+                    >
+                      {i + 1}
+                    </span>
                     <span className="font-mono text-sm font-medium text-brand">
                       step {i + 1}
                     </span>
-                    <h3 className="mt-3 text-lg font-semibold">{s.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-ink-soft">{s.text}</p>
+                    <h3 className="mt-3 text-xl font-semibold">{s.title}</h3>
+                    <p className="mt-3 leading-relaxed text-ink-soft">{s.text}</p>
                   </div>
                 </Reveal>
               ))}
@@ -138,48 +180,27 @@ export default function HomePage() {
         </section>
 
         {/* ---------- Features grid ---------- */}
-        <section className="container-page py-20">
+        <section className="container-page py-28 sm:py-36">
           <Reveal>
             <p className="eyebrow">What you get</p>
-            <h2 className="h-display mt-3 max-w-2xl text-3xl sm:text-4xl">
+            <h2 className="h-display mt-4 max-w-3xl text-4xl sm:text-5xl">
               A structured second read, without the hourly rate
             </h2>
           </Reveal>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((f) => (
-              <Reveal key={f.title}>
-                <div className="card card-hover h-full p-7">
-                  <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 text-brand">
-                    <f.icon size={20} aria-hidden />
+          <div className="mt-16 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+            {features.map((f, i) => (
+              <Reveal key={f.title} delay={(i % 3) * 60}>
+                <div className="card card-hover group h-full p-9 sm:p-10">
+                  <span className="relative grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-brand to-brand-bright text-white shadow-[0_8px_20px_-10px_var(--color-brand)] transition-all duration-300 group-hover:scale-110 group-hover:-rotate-6 group-hover:shadow-[0_12px_28px_-8px_var(--color-brand)]">
+                    <f.icon size={22} aria-hidden />
                   </span>
-                  <h3 className="mt-4 font-semibold">{f.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-soft">{f.text}</p>
+                  <h3 className="mt-6 text-xl font-semibold">{f.title}</h3>
+                  <p className="mt-3 leading-relaxed text-ink-soft">{f.text}</p>
                 </div>
               </Reveal>
             ))}
           </div>
         </section>
-
-        {/* ---------- Pricing teaser ---------- */}
-        <section className="container-page py-20">
-          <Reveal>
-            <div className="card flex flex-col items-center gap-6 p-10 text-center sm:p-14">
-              <p className="eyebrow">Pricing</p>
-              <h2 className="h-display max-w-xl text-3xl sm:text-4xl">
-                Less than the price of 10 minutes with a lawyer. Every month.
-              </h2>
-              <p className="max-w-lg text-ink-soft">
-                Start free with one analysis per month. Upgrade to Pro from
-                €24/month when contracts become part of your routine.
-              </p>
-              <Link href="/pricing" className="btn btn-primary">
-                See plans <ArrowRight size={16} aria-hidden />
-              </Link>
-            </div>
-          </Reveal>
-        </section>
-
-        <CTA />
       </main>
       <Footer />
     </>

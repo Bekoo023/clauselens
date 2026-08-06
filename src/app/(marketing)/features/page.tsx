@@ -52,37 +52,47 @@ const sections = [
 export default function FeaturesPage() {
   return (
     <>
-      <section className="container-page py-16 sm:py-20">
-        <p className="eyebrow">Features</p>
-        <h1 className="h-display mt-4 max-w-2xl text-4xl sm:text-5xl">
-          Everything a careful reader would catch. In one minute.
+      <section className="relative container-page py-20 sm:py-24">
+        <p className="eyebrow rise-in">Features</p>
+        <h1
+          className="h-display rise-in mt-4 max-w-3xl text-4xl leading-[1.08] sm:text-5xl lg:text-6xl"
+          style={{ "--rise-delay": "60ms" } as React.CSSProperties}
+        >
+          Everything a careful reader would catch.{" "}
+          <span className="text-gradient">In one minute.</span>
         </h1>
-        <p className="mt-5 max-w-xl text-lg text-ink-soft">
+        <p
+          className="rise-in mt-6 max-w-xl text-lg text-ink-soft"
+          style={{ "--rise-delay": "120ms" } as React.CSSProperties}
+        >
           ClauseLens is built for people who sign contracts, not people who write them.
         </p>
       </section>
 
       <section className="container-page grid gap-6 pb-20 md:grid-cols-2">
-        {sections.map((s) => (
-          <Reveal key={s.title}>
-            <article className="card card-hover h-full p-8">
-              <span className="grid h-11 w-11 place-items-center rounded-xl bg-brand/10 text-brand">
+        {sections.map((s, i) => (
+          <Reveal key={s.title} variant={i % 2 ? "right" : "left"} delay={(i % 2) * 60}>
+            <article className="card card-hover group h-full p-8">
+              <span className="relative grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-brand to-brand-bright text-white shadow-[0_8px_20px_-10px_var(--color-brand)] transition-all duration-300 group-hover:scale-110 group-hover:-rotate-6 group-hover:shadow-[0_12px_28px_-8px_var(--color-brand)]">
                 <s.icon size={22} aria-hidden />
               </span>
               <h2 className="mt-5 text-xl font-semibold">{s.title}</h2>
               <p className="mt-3 leading-relaxed text-ink-soft">{s.text}</p>
-              <p className="mt-3 border-l-2 border-brand/30 pl-3 text-sm text-ink-soft">{s.detail}</p>
+              <p className="mt-4 rounded-r-lg border-l-2 border-brand/40 bg-brand/[0.04] py-2 pl-3 text-sm text-ink-soft">
+                {s.detail}
+              </p>
             </article>
           </Reveal>
         ))}
       </section>
 
       <section className="container-page pb-20">
-        <Reveal>
-          <div className="card flex flex-col items-center gap-4 p-10 text-center">
-            <h2 className="h-display text-2xl sm:text-3xl">Compare plans</h2>
-            <Link href="/pricing" className="btn btn-primary">
-              See pricing <ArrowRight size={16} aria-hidden />
+        <Reveal variant="scale">
+          <div className="card card-gradient-border relative flex flex-col items-center gap-5 overflow-hidden p-12 text-center">
+            <h2 className="h-display relative text-2xl sm:text-3xl">Compare plans</h2>
+            <Link href="/pricing" className="btn btn-primary group relative">
+              See pricing
+              <ArrowRight size={16} aria-hidden className="transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </div>
         </Reveal>

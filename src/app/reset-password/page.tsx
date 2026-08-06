@@ -46,7 +46,7 @@ export default function ResetPasswordPage() {
       subtitle={<>Remembered it? <Link href="/login" className="font-semibold text-brand hover:underline">Log in</Link></>}
     >
       {done ? (
-        <p className="text-sm text-ink-soft">Password updated. Redirecting to login…</p>
+        <p className="text-sm text-ink-soft">Password updated. Redirecting to login...</p>
       ) : params && !params.token ? (
         <p className="text-sm text-risk-high">
           This reset link is invalid. Request a new one from the{" "}
@@ -61,7 +61,7 @@ export default function ResetPasswordPage() {
           </div>
           {error && <p role="alert" className="text-sm text-risk-high">{error}</p>}
           <button type="submit" disabled={loading || !params} className="btn btn-primary w-full disabled:opacity-60">
-            {loading ? "Updating…" : "Update password"}
+            {loading ? "Updating..." : "Update password"}
           </button>
         </form>
       )}

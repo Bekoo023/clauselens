@@ -113,13 +113,14 @@ export default async function DashboardPage({
 
   return (
     <div className="mx-auto max-w-5xl">
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className="rise-in flex flex-wrap items-center justify-between gap-4">
         <div>
           <p className="eyebrow">Welcome back</p>
-          <h1 className="h-display mt-1 text-2xl">Contracts</h1>
+          <h1 className="h-display mt-1 text-3xl">Contracts</h1>
         </div>
-        <Link href="/dashboard/new" className="btn btn-primary">
-          <FilePlus2 size={16} aria-hidden /> New analysis
+        <Link href="/dashboard/new" className="btn btn-primary group">
+          <FilePlus2 size={16} aria-hidden className="transition-transform duration-300 group-hover:rotate-90" />
+          New analysis
         </Link>
       </div>
 
@@ -134,7 +135,7 @@ export default async function DashboardPage({
 
       {/* Plan & usage */}
       {user && (
-        <div className="card mt-4 p-5">
+        <div className="card chip-in mt-4 p-5">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <p className="text-sm font-semibold">{PLAN_LIMITS[user.plan as Plan].label} plan</p>
             <p className="text-xs text-ink-soft">
@@ -144,7 +145,7 @@ export default async function DashboardPage({
           {Number.isFinite(limit) && (
             <div className="mt-2.5 h-1.5 overflow-hidden rounded-full bg-ink/8">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-brand to-brand-bright transition-[width] duration-500"
+                className="meter-fill-w h-full rounded-full bg-gradient-to-r from-brand to-brand-bright"
                 style={{ width: `${usagePct}%` }}
               />
             </div>
@@ -159,36 +160,36 @@ export default async function DashboardPage({
 
       {/* Stat cards */}
       <div className="mt-4 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-        <div className="card p-4 sm:p-5">
+        <div className="card card-hover chip-in group p-4 sm:p-5" style={{ animationDelay: "0.05s" }}>
           <div className="flex items-center gap-2 sm:gap-2.5">
-            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand sm:h-9 sm:w-9">
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand to-brand-bright text-white shadow-[0_6px_16px_-8px_var(--color-brand)] transition-transform duration-500 group-hover:scale-110 sm:h-9 sm:w-9">
               <FileText size={16} aria-hidden />
             </span>
             <p className="text-xs font-medium leading-tight text-ink-soft">Contracts analyzed</p>
           </div>
           <p className="h-display mt-2.5 text-2xl sm:text-3xl">{contracts.length}</p>
         </div>
-        <div className="card p-4 sm:p-5">
+        <div className="card card-hover chip-in group p-4 sm:p-5" style={{ animationDelay: "0.1s" }}>
           <div className="flex items-center gap-2 sm:gap-2.5">
             <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-xl sm:h-9 sm:w-9 ${avgLevel ? RISK_CHIP[avgLevel] : "bg-ink/5 text-ink-soft"}`}>
               <Gauge size={16} aria-hidden />
             </span>
             <p className="text-xs font-medium leading-tight text-ink-soft">Average risk score</p>
           </div>
-          <p className="h-display mt-2.5 text-2xl sm:text-3xl">{avgScore ?? "—"}</p>
+          <p className="h-display mt-2.5 text-2xl sm:text-3xl">{avgScore ?? "-"}</p>
         </div>
-        <div className="card p-4 sm:p-5">
+        <div className="card card-hover chip-in group p-4 sm:p-5" style={{ animationDelay: "0.15s" }}>
           <div className="flex items-center gap-2 sm:gap-2.5">
-            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand sm:h-9 sm:w-9">
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand to-brand-bright text-white shadow-[0_6px_16px_-8px_var(--color-brand)] transition-transform duration-500 group-hover:scale-110 sm:h-9 sm:w-9">
               <TrendingUp size={16} aria-hidden />
             </span>
             <p className="text-xs font-medium leading-tight text-ink-soft">Analyzed this week</p>
           </div>
           <p className="h-display mt-2.5 text-2xl sm:text-3xl">{analyzedThisWeek}</p>
         </div>
-        <div className="card p-4 sm:p-5">
+        <div className="card card-hover chip-in group p-4 sm:p-5" style={{ animationDelay: "0.2s" }}>
           <div className="flex items-center gap-2 sm:gap-2.5">
-            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-brand/10 text-brand sm:h-9 sm:w-9">
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand to-brand-bright text-white shadow-[0_6px_16px_-8px_var(--color-brand)] transition-transform duration-500 group-hover:scale-110 sm:h-9 sm:w-9">
               <Zap size={16} aria-hidden />
             </span>
             <p className="text-xs font-medium leading-tight text-ink-soft">Analyses left this month</p>
@@ -203,7 +204,8 @@ export default async function DashboardPage({
       {highestRisk && (
         <Link
           href={`/dashboard/contracts/${highestRisk.id}`}
-          className="card card-hover mt-4 flex items-center gap-4 border-risk-high/20 p-5"
+          className="card card-hover chip-in mt-4 flex items-center gap-4 border-risk-high/20 p-5"
+          style={{ animationDelay: "0.25s" }}
         >
           <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-risk-high/10 text-risk-high">
             <ShieldAlert size={20} aria-hidden />
@@ -221,7 +223,7 @@ export default async function DashboardPage({
       {/* Activity + breakdowns */}
       {contracts.length > 0 && (
         <>
-          <div className="card mt-4 p-5">
+          <div className="card chip-in mt-4 p-5" style={{ animationDelay: "0.3s" }}>
             <p className="text-xs font-medium text-ink-soft">Analysis activity · last 14 days</p>
             <div className="mt-3">
               <ActivityChart data={activityData} />
@@ -229,7 +231,7 @@ export default async function DashboardPage({
           </div>
 
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <div className="card p-5">
+            <div className="card chip-in p-5" style={{ animationDelay: "0.35s" }}>
               <p className="text-xs font-medium text-ink-soft">Risk distribution</p>
               <div className="mt-3">
                 <RiskDistribution
@@ -241,7 +243,7 @@ export default async function DashboardPage({
                 />
               </div>
             </div>
-            <div className="card p-5">
+            <div className="card chip-in p-5" style={{ animationDelay: "0.4s" }}>
               <p className="text-xs font-medium text-ink-soft">Contract types</p>
               <div className="mt-3">
                 <TypeBreakdown items={typeItems} />
